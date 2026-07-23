@@ -1,0 +1,76 @@
+{
+  "name": "ai-native-engineering",
+  "title": "AI Native Engineering Research Inbox",
+  "brief_title": "AI Native Engineering Research Brief",
+  "analysis_focus": ["AI-native operating models", "harness engineering", "loop engineering", "agent workflows", "evaluation", "governance"],
+  "description": "Track AI-native engineering operating models, AI harness patterns, loop engineering, agentic software-development workflows, engineering-productivity metrics, adoption phases, governance, and practical implementation ideas that can improve this repository's strategy notes, guidelines, and reusable skills.",
+  "current_context": {
+    "include": [
+      "AGENTS.md",
+      "CLAUDE.md",
+      "README.md",
+      "guidelines/*.md",
+      "skills/*/SKILL.md",
+      "strategies/*.md"
+    ],
+    "exclude": [
+      "**/.env",
+      "**/node_modules/**",
+      "**/.git/**",
+      "research/**",
+      "research-history/**",
+      "research-targets/**"
+    ]
+  },
+  "idea_output": {
+    "directory": "ideas/ai-native-engineering"
+  },
+  "facets": [
+    "implementation",
+    "evaluation",
+    "security",
+    "governance",
+    "adoption",
+    "failure_modes",
+    "loop_engineering"
+  ],
+  "dynamic_query_planning": {
+    "enabled": true,
+    "use_web_search": true,
+    "max_dynamic_queries": 2,
+    "max_results": 6,
+    "candidate_pool": 12,
+    "sort": "latest",
+    "max_query_terms": 3
+  },
+  "youtube_searches": [
+    {
+      "query": "AI native engineering",
+      "sort": "latest",
+      "max_results": 6,
+      "candidate_pool": 12
+    },
+    {
+      "query": "AI harness agents",
+      "sort": "latest",
+      "max_results": 6,
+      "candidate_pool": 12
+    }
+  ],
+  "source_limits": {
+    "max_video_transcripts": 6
+  },
+  "selection": {
+    "min_duration_seconds": 300
+  },
+  "source_history": {
+    "path": "research-history/ai-native-engineering/sources.jsonl",
+    "exclude_previously_used": true,
+    "allow_reuse_after_days": 90
+  },
+  "retention": {
+    "enabled": false,
+    "keep_latest_runs": 3,
+    "delete_runs_older_than_days": 7
+  }
+}

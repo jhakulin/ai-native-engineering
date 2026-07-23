@@ -1,0 +1,46 @@
+name: Update Repository Context Manifest
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-context-manifest
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout merged commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Generate deterministic context manifest
+        run: node scripts/generate-context-manifest.js
+        env:
+          RESEARCH_SOURCE_SHA: ${{ github.sha }}
+
+      - name: Validate context manifest
+        run: node scripts/validate-context-manifest.js
+
+      - name: Commit manifest when context changed
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- research/context-manifest.json; then
+            echo "Context manifest is already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/context-manifest.json
+          git commit -m "Update repository context manifest [skip ci]"
+          git push origin HEAD:main
