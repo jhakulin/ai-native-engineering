@@ -1,0 +1,71 @@
+{
+  "name": "agent-skills",
+  "title": "Agent Skills Research Brief",
+  "brief_title": "Agent Skills Research Brief",
+  "analysis_focus": ["skill authoring", "progressive disclosure", "trigger design", "validation", "security", "reusable skill workflows"],
+  "description": "Track reusable agent skill patterns, SKILL.md authoring practices, progressive disclosure, trigger design, validation, testing, and skill safety ideas that can improve this repository.",
+  "current_context": {
+    "include": [
+      "AGENTS.md",
+      "README.md",
+      "guidelines/skill-guideline.md",
+      "guidelines/minimal-skill-template.md",
+      "skills/*/SKILL.md",
+      "strategies/codex-strategy-research-radar.md"
+    ],
+    "exclude": [
+      "**/.env",
+      "**/node_modules/**",
+      "**/.git/**"
+    ]
+  },
+  "idea_output": {
+    "directory": "ideas/skills"
+  },
+  "facets": [
+    "skill_authoring",
+    "progressive_disclosure",
+    "trigger_design",
+    "validation",
+    "security",
+    "reuse_patterns"
+  ],
+  "dynamic_query_planning": {
+    "enabled": true,
+    "use_web_search": true,
+    "max_dynamic_queries": 2,
+    "max_results": 6,
+    "candidate_pool": 12,
+    "sort": "latest"
+  },
+  "youtube_searches": [
+    {
+      "query": "agent skills SKILL.md standard reusable workflows",
+      "sort": "latest",
+      "max_results": 6,
+      "candidate_pool": 12
+    },
+    {
+      "query": "AI agent skills progressive disclosure validation evaluation",
+      "sort": "latest",
+      "max_results": 6,
+      "candidate_pool": 12
+    }
+  ],
+  "source_limits": {
+    "max_video_transcripts": 6
+  },
+  "selection": {
+    "min_duration_seconds": 300
+  },
+  "source_history": {
+    "path": "research-history/agent-skills/sources.jsonl",
+    "exclude_previously_used": true,
+    "allow_reuse_after_days": 90
+  },
+  "retention": {
+    "enabled": false,
+    "keep_latest_runs": 3,
+    "delete_runs_older_than_days": 7
+  }
+}

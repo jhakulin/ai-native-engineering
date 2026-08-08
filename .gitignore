@@ -1,0 +1,5 @@
+.env
+.env.*
+!.env.example
+skills/get-youtube-transcription/.env
+skills/get-youtube-transcription/.env.local

@@ -1,0 +1,77 @@
+{
+  "name": "knowledge-graphs-software-repositories",
+  "title": "Knowledge Graphs For Software Repositories Research Inbox",
+  "brief_title": "Knowledge Graphs For Software Repositories Research Brief",
+  "analysis_focus": ["repository knowledge graphs", "code and dependency relationships", "architecture discovery", "impact analysis", "freshness and confidence", "graph governance"],
+  "description": "Track knowledge graph solutions and technologies for company-level and domain-specific software repositories, including code and dependency relationships, architecture discovery, repository semantics, impact analysis, engineering context, governance, graph construction, and practical adoption patterns.",
+  "idea_output": {
+    "directory": "ideas/knowledge-graphs-software-repositories"
+  },
+  "facets": [
+    "enterprise_knowledge_graphs",
+    "software_repository_graphs",
+    "code_and_dependency_relationships",
+    "architecture_discovery",
+    "repository_semantics",
+    "impact_analysis",
+    "graph_governance",
+    "adoption_patterns"
+  ],
+  "current_context": {
+    "include": [
+      "AGENTS.md",
+      "CLAUDE.md",
+      "README.md",
+      "guidelines/*.md",
+      "skills/*/SKILL.md",
+      "strategies/*.md"
+    ],
+    "exclude": [
+      "**/.env",
+      "**/node_modules/**",
+      "**/.git/**",
+      "research/**",
+      "research-history/**",
+      "research-targets/**"
+    ]
+  },
+  "dynamic_query_planning": {
+    "enabled": true,
+    "use_web_search": true,
+    "max_dynamic_queries": 2,
+    "max_results": 6,
+    "candidate_pool": 12,
+    "sort": "latest",
+    "max_query_terms": 3
+  },
+  "youtube_searches": [
+    {
+      "query": "software knowledge graphs",
+      "sort": "latest",
+      "max_results": 6,
+      "candidate_pool": 12
+    },
+    {
+      "query": "code knowledge graphs",
+      "sort": "latest",
+      "max_results": 6,
+      "candidate_pool": 12
+    }
+  ],
+  "source_limits": {
+    "max_video_transcripts": 6
+  },
+  "selection": {
+    "min_duration_seconds": 300
+  },
+  "source_history": {
+    "path": "research-history/knowledge-graphs-software-repositories/sources.jsonl",
+    "exclude_previously_used": true,
+    "allow_reuse_after_days": 90
+  },
+  "retention": {
+    "enabled": false,
+    "keep_latest_runs": 3,
+    "delete_runs_older_than_days": 7
+  }
+}
