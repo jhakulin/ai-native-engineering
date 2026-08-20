@@ -1,0 +1,313 @@
+{
+  "schemaVersion": 1,
+  "reportType": "context_efficiency_stats",
+  "session": {
+    "harness": "codex",
+    "id": "codex-session",
+    "path": "<fixture>",
+    "workingDirectory": "/workspace/demo",
+    "selection": "explicit",
+    "model": "codex-fixture-model",
+    "modelSource": "turn_context.payload.model",
+    "effort": "low",
+    "effortSource": "turn_context.payload.effort",
+    "activeHistoryScope": "provider-facing messages from the latest compacted replacement history plus subsequent rollout items; branch semantics unavailable"
+  },
+  "metrics": [
+    {
+      "id": "active.serialized_bytes",
+      "name": "Active reconstructed serialized size",
+      "value": 484,
+      "unit": "bytes",
+      "scope": "active_reconstructed_messages",
+      "evidence": "reconstructed",
+      "source": "codex history reconstruction; UTF-8 bytes of the canonical classified local representation",
+      "approximate": false,
+      "limitation": "Serialized bytes are not tokens, billing usage, or byte-for-byte JSONL size."
+    },
+    {
+      "id": "active.tokens",
+      "name": "Active context",
+      "value": null,
+      "unit": "tokens",
+      "scope": "active_reconstructed_messages",
+      "evidence": "unavailable",
+      "source": "No verified active-context token source",
+      "approximate": false,
+      "limitation": "Persisted records do not establish exact next-request occupancy."
+    },
+    {
+      "id": "context.capacity",
+      "name": "Context capacity",
+      "value": 200000,
+      "unit": "tokens",
+      "scope": "active_reconstructed_messages",
+      "evidence": "provider_reported",
+      "source": "event_msg.payload.info.model_context_window",
+      "approximate": false,
+      "limitation": null
+    },
+    {
+      "id": "session.model_calls",
+      "name": "Observable model calls",
+      "value": 1,
+      "unit": "calls",
+      "scope": "cumulative_inspected_session",
+      "evidence": "provider_reported",
+      "source": "event_msg.payload.info.last_token_usage / total_token_usage",
+      "approximate": false,
+      "limitation": null
+    },
+    {
+      "id": "session.compactions",
+      "name": "Compactions",
+      "value": 0,
+      "unit": "compactions",
+      "scope": "cumulative_inspected_session",
+      "evidence": "exact_persisted",
+      "source": "codex persisted compaction record count",
+      "approximate": false,
+      "limitation": null
+    }
+  ],
+  "usage": {
+    "latest": {
+      "input": 100,
+      "cachedInput": 60,
+      "cacheRead": null,
+      "cacheWrite": 7,
+      "output": 9,
+      "reasoningOutput": 3,
+      "providerTotal": 109
+    },
+    "cumulative": {
+      "input": 250,
+      "cachedInput": 140,
+      "cacheRead": null,
+      "cacheWrite": 11,
+      "output": 20,
+      "reasoningOutput": 8,
+      "providerTotal": 270
+    },
+    "units": "tokens",
+    "latestScope": "latest_provider_response",
+    "cumulativeScope": "cumulative_inspected_session",
+    "evidence": "provider_reported",
+    "source": "event_msg.payload.info.last_token_usage / total_token_usage"
+  },
+  "composition": [
+    {
+      "id": "composition.instructions",
+      "category": "instructions",
+      "name": "Instructions and memory",
+      "count": 2,
+      "value": 79,
+      "unit": "bytes",
+      "scope": "active_reconstructed_messages",
+      "evidence": "exact_serialized_local_representation",
+      "source": "UTF-8 bytes of mutually exclusive canonical classified values",
+      "share": 16.3
+    },
+    {
+      "id": "composition.other",
+      "category": "other",
+      "name": "Other or unsupported",
+      "count": 2,
+      "value": 35,
+      "unit": "bytes",
+      "scope": "active_reconstructed_messages",
+      "evidence": "exact_serialized_local_representation",
+      "source": "UTF-8 bytes of mutually exclusive canonical classified values",
+      "share": 7.2
+    },
+    {
+      "id": "composition.user",
+      "category": "user",
+      "name": "User content",
+      "count": 1,
+      "value": 46,
+      "unit": "bytes",
+      "scope": "active_reconstructed_messages",
+      "evidence": "exact_serialized_local_representation",
+      "source": "UTF-8 bytes of mutually exclusive canonical classified values",
+      "share": 9.5
+    },
+    {
+      "id": "composition.tool_calls",
+      "category": "tool_calls",
+      "name": "Tool calls",
+      "count": 2,
+      "value": 245,
+      "unit": "bytes",
+      "scope": "active_reconstructed_messages",
+      "evidence": "exact_serialized_local_representation",
+      "source": "UTF-8 bytes of mutually exclusive canonical classified values",
+      "share": 50.6
+    },
+    {
+      "id": "composition.tool_results",
+      "category": "tool_results",
+      "name": "Tool results",
+      "count": 1,
+      "value": 79,
+      "unit": "bytes",
+      "scope": "active_reconstructed_messages",
+      "evidence": "exact_serialized_local_representation",
+      "source": "UTF-8 bytes of mutually exclusive canonical classified values",
+      "share": 16.3
+    }
+  ],
+  "contributors": [
+    {
+      "id": "tool-calls:custom-tool-call:1",
+      "category": "tool_calls",
+      "type": "custom_tool_call",
+      "value": 129,
+      "unit": "bytes",
+      "share": 26.7,
+      "scope": "active_reconstructed_messages",
+      "evidence": "exact_serialized_local_representation"
+    },
+    {
+      "id": "tool-calls:custom-tool-call:2",
+      "category": "tool_calls",
+      "type": "custom_tool_call",
+      "value": 116,
+      "unit": "bytes",
+      "share": 24,
+      "scope": "active_reconstructed_messages",
+      "evidence": "exact_serialized_local_representation"
+    },
+    {
+      "id": "tool-results:custom-tool-call-output:1",
+      "category": "tool_results",
+      "type": "custom_tool_call_output",
+      "value": 79,
+      "unit": "bytes",
+      "share": 16.3,
+      "scope": "active_reconstructed_messages",
+      "evidence": "exact_serialized_local_representation"
+    },
+    {
+      "id": "user:input-text:1",
+      "category": "user",
+      "type": "input_text",
+      "value": 46,
+      "unit": "bytes",
+      "share": 9.5,
+      "scope": "active_reconstructed_messages",
+      "evidence": "exact_serialized_local_representation"
+    },
+    {
+      "id": "instructions:input-text:1",
+      "category": "instructions",
+      "type": "input_text",
+      "value": 45,
+      "unit": "bytes",
+      "share": 9.3,
+      "scope": "active_reconstructed_messages",
+      "evidence": "exact_serialized_local_representation"
+    },
+    {
+      "id": "instructions:base-instructions:1",
+      "category": "instructions",
+      "type": "base_instructions",
+      "value": 34,
+      "unit": "bytes",
+      "share": 7,
+      "scope": "active_reconstructed_messages",
+      "evidence": "exact_serialized_local_representation"
+    },
+    {
+      "id": "other:message-metadata:1",
+      "category": "other",
+      "type": "message_metadata",
+      "value": 20,
+      "unit": "bytes",
+      "share": 4.1,
+      "scope": "active_reconstructed_messages",
+      "evidence": "exact_serialized_local_representation"
+    },
+    {
+      "id": "other:message-metadata:2",
+      "category": "other",
+      "type": "message_metadata",
+      "value": 15,
+      "unit": "bytes",
+      "share": 3.1,
+      "scope": "active_reconstructed_messages",
+      "evidence": "exact_serialized_local_representation"
+    }
+  ],
+  "measuredDrivers": [
+    {
+      "id": "driver.large_active_contributor",
+      "kind": "large_active_contributor",
+      "name": "Large active contributor",
+      "scope": "active_reconstructed_messages",
+      "evidence": "exact_serialized_local_representation",
+      "metricIds": [
+        "active.serialized_bytes"
+      ],
+      "contributorIds": [
+        "tool-calls:custom-tool-call:1"
+      ],
+      "observations": [
+        {
+          "name": "contributor_size",
+          "value": 129,
+          "unit": "bytes",
+          "source": "contributors.tool-calls:custom-tool-call:1.value"
+        },
+        {
+          "name": "contributor_share",
+          "value": 26.7,
+          "unit": "percent",
+          "source": "contributors.tool-calls:custom-tool-call:1.share"
+        }
+      ],
+      "description": "tool-calls:custom-tool-call:1 is the largest measured contributor at 129 bytes (26.7% of active_reconstructed_messages).",
+      "limitation": "Size does not establish that this contributor is unnecessary or safe to reduce."
+    },
+    {
+      "id": "driver.standing_context",
+      "kind": "standing_context",
+      "name": "Material standing context",
+      "scope": "active_reconstructed_messages",
+      "evidence": "exact_serialized_local_representation",
+      "metricIds": [
+        "active.serialized_bytes"
+      ],
+      "contributorIds": [
+        "instructions:input-text:1",
+        "instructions:base-instructions:1"
+      ],
+      "observations": [
+        {
+          "name": "standing_context_size",
+          "value": 79,
+          "unit": "bytes",
+          "source": "composition.instructions_and_tool_definitions.value"
+        },
+        {
+          "name": "standing_context_share",
+          "value": 16.3,
+          "unit": "percent",
+          "source": "composition.instructions_and_tool_definitions.share"
+        }
+      ],
+      "description": "Instructions and tool definitions occupy 79 bytes (16.3% of active_reconstructed_messages) in a session with 1 observable model call(s).",
+      "limitation": "One session does not establish that any standing instruction or tool is unused."
+    }
+  ],
+  "observedRequest": null,
+  "limitations": [
+    "The rollout is a persisted transcript, not a byte-for-byte dump of the latest provider request.",
+    "Content removed before persistence or discarded by compaction cannot be recovered unless a summary was saved.",
+    "A referenced documentation path is not considered read unless tool evidence records access to it.",
+    "Some unsupported or non-context persisted record types were omitted.",
+    "Composition measures reconstructed provider-facing persisted messages; hidden instructions, tool definitions, and unpersisted request fields are outside this scope.",
+    "Composition and contributors use UTF-8 bytes of a canonical classified local representation, not byte-for-byte JSONL size or per-item token counts.",
+    "Raw transcript, tool payload, command arguments, environment values, and reasoning text are omitted from this stats report."
+  ]
+}
