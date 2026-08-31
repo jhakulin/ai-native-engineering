@@ -1,0 +1,57 @@
+# Context review
+
+Agent: claude
+Session: <fixture>
+Session ID: claude-session
+Working directory: /workspace/demo
+Scope: preserved local evidence; not a guaranteed byte-for-byte current provider request
+
+## Persisted instructions
+(none found)
+
+## Messages
+
+1. [exact-persisted-transcript] user @ 2026-08-15T10:00:00Z
+```
+Review the code
+```
+
+2. [exact-persisted-transcript] assistant @ 2026-08-15T10:00:01Z
+```
+[tool call: Read]
+```
+
+3. [exact-persisted-transcript] user @ 2026-08-15T10:00:02Z
+```
+{"type":"tool_result","tool_use_id":"tool-1","content":"Claude guidance"}
+```
+
+## File access evidence
+- [reconstructed-from-persisted-tool-call] /workspace/demo/CLAUDE.md via Read
+
+## Referenced resources
+(no URL/URI arguments found)
+
+## Tool calls
+
+1. [exact-persisted] Read
+```
+{
+  "file_path": "/workspace/demo/CLAUDE.md"
+}
+```
+Result:
+```
+Claude guidance
+```
+
+## Compaction
+(none found)
+
+## Branch summaries
+(none found)
+
+## Unavailable or uncertain context
+- Claude's JSONL transcript does not expose the complete hidden system prompt or an exact current provider request.
+- CLAUDE.md and memory content may appear as attachments or message wrappers, but absence from this report does not prove absence from provider context.
+- Compaction may replace earlier detail with a persisted summary.

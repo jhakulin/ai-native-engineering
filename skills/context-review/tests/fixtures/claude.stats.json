@@ -1,0 +1,473 @@
+{
+  "schemaVersion": 1,
+  "reportType": "context_efficiency_stats",
+  "session": {
+    "harness": "claude",
+    "id": "claude-session",
+    "path": "<fixture>",
+    "workingDirectory": "/workspace/demo",
+    "selection": "explicit",
+    "model": "claude-fixture-model",
+    "modelSource": "assistant.message.model",
+    "effort": null,
+    "effortSource": null,
+    "activeHistoryScope": "provider-facing messages on the latest parent-linked persisted history"
+  },
+  "metrics": [
+    {
+      "id": "active.serialized_bytes",
+      "name": "Active reconstructed serialized size",
+      "value": 237,
+      "unit": "bytes",
+      "scope": "active_reconstructed_messages",
+      "evidence": "reconstructed",
+      "source": "claude history reconstruction; UTF-8 bytes of the canonical classified local representation",
+      "approximate": false,
+      "limitation": "Serialized bytes are not tokens, billing usage, or byte-for-byte JSONL size."
+    },
+    {
+      "id": "active.tokens",
+      "name": "Active context",
+      "value": null,
+      "unit": "tokens",
+      "scope": "active_reconstructed_messages",
+      "evidence": "unavailable",
+      "source": "No verified active-context token source",
+      "approximate": false,
+      "limitation": "Persisted records do not establish exact next-request occupancy."
+    },
+    {
+      "id": "context.capacity",
+      "name": "Context capacity",
+      "value": null,
+      "unit": "tokens",
+      "scope": "active_reconstructed_messages",
+      "evidence": "unavailable",
+      "source": "No verified persisted capacity field",
+      "approximate": false,
+      "limitation": "Capacity is unavailable from this session record."
+    },
+    {
+      "id": "usage.latest.input",
+      "name": "Latest provider-reported input",
+      "value": 20,
+      "unit": "tokens",
+      "scope": "latest_provider_response",
+      "evidence": "provider_reported",
+      "source": "assistant.message.usage",
+      "approximate": false,
+      "limitation": null
+    },
+    {
+      "id": "usage.latest.processed_input",
+      "name": "Latest provider-reported processed input",
+      "value": 32,
+      "unit": "tokens",
+      "scope": "latest_provider_response",
+      "evidence": "provider_reported",
+      "source": "claude input plus separately reported cache-read and cache-write tokens",
+      "approximate": false,
+      "limitation": null
+    },
+    {
+      "id": "usage.cumulative.input",
+      "name": "Cumulative provider-reported input",
+      "value": 20,
+      "unit": "tokens",
+      "scope": "cumulative_inspected_session",
+      "evidence": "provider_reported",
+      "source": "assistant.message.usage",
+      "approximate": false,
+      "limitation": null
+    },
+    {
+      "id": "usage.cumulative.processed_input",
+      "name": "Cumulative provider-reported processed input",
+      "value": 32,
+      "unit": "tokens",
+      "scope": "cumulative_inspected_session",
+      "evidence": "provider_reported",
+      "source": "claude input plus separately reported cache-read and cache-write tokens",
+      "approximate": false,
+      "limitation": null
+    },
+    {
+      "id": "usage.cumulative.reprocessed_input",
+      "name": "Cumulative provider-reported reprocessed input",
+      "value": 7,
+      "unit": "tokens",
+      "scope": "cumulative_inspected_session",
+      "evidence": "provider_reported",
+      "source": "claude input plus separately reported cache-read and cache-write tokens",
+      "approximate": false,
+      "limitation": null
+    },
+    {
+      "id": "usage.cumulative.fresh_input",
+      "name": "Cumulative provider-reported fresh input",
+      "value": 20,
+      "unit": "tokens",
+      "scope": "cumulative_inspected_session",
+      "evidence": "provider_reported",
+      "source": "claude input plus separately reported cache-read and cache-write tokens",
+      "approximate": false,
+      "limitation": null
+    },
+    {
+      "id": "usage.cumulative.visible_output",
+      "name": "Cumulative provider-reported visible output",
+      "value": null,
+      "unit": "tokens",
+      "scope": "cumulative_inspected_session",
+      "evidence": "unavailable",
+      "source": "Claude output_tokens without a separate preserved reasoning-output field",
+      "approximate": false,
+      "limitation": "Visible output is unavailable because preserved Claude usage does not separate reasoning output."
+    },
+    {
+      "id": "usage.cumulative.input_output_tokens",
+      "name": "Cumulative processed input and visible output",
+      "value": null,
+      "unit": "tokens",
+      "scope": "cumulative_inspected_session",
+      "evidence": "unavailable",
+      "source": "Claude output_tokens without a separate preserved reasoning-output field",
+      "approximate": false,
+      "limitation": "Visible output is unavailable because preserved Claude usage does not separate reasoning output."
+    },
+    {
+      "id": "activity.repeated_failed_operations",
+      "name": "Repeated explicitly failed operations",
+      "value": 0,
+      "unit": "calls",
+      "scope": "cumulative_inspected_session",
+      "evidence": "exact_persisted",
+      "source": "Claude tool_result.is_error linked by tool_use_id",
+      "approximate": false,
+      "limitation": null
+    },
+    {
+      "id": "session.model_calls",
+      "name": "Observable model calls",
+      "value": 1,
+      "unit": "calls",
+      "scope": "cumulative_inspected_session",
+      "evidence": "provider_reported",
+      "source": "assistant.message.usage; requestId when preserved; assistant usage-record ordinal otherwise",
+      "approximate": false,
+      "limitation": null
+    },
+    {
+      "id": "session.compactions",
+      "name": "Compactions",
+      "value": 0,
+      "unit": "compactions",
+      "scope": "cumulative_inspected_session",
+      "evidence": "exact_persisted",
+      "source": "claude persisted compaction record count",
+      "approximate": false,
+      "limitation": null
+    }
+  ],
+  "usage": {
+    "latest": {
+      "input": 20,
+      "cachedInput": null,
+      "cacheRead": 7,
+      "cacheWrite": 5,
+      "output": 8,
+      "reasoningOutput": null,
+      "providerTotal": null
+    },
+    "cumulative": {
+      "input": 20,
+      "cachedInput": null,
+      "cacheRead": 7,
+      "cacheWrite": 5,
+      "output": 8,
+      "reasoningOutput": null,
+      "providerTotal": null
+    },
+    "units": "tokens",
+    "latestScope": "latest_provider_response",
+    "cumulativeScope": "cumulative_inspected_session",
+    "evidence": "provider_reported",
+    "source": "assistant.message.usage",
+    "integrity": {
+      "rawUsageRecordCount": 1,
+      "distinctObservableRequestCount": 1,
+      "duplicateUsageRecordCount": 0,
+      "conflictingUsageRecordCount": 0,
+      "identityRule": "requestId when preserved; assistant usage-record ordinal otherwise"
+    },
+    "reasoningSubsetComplete": false,
+    "attribution": {
+      "processedInput": 32,
+      "reprocessedInput": 7,
+      "freshInput": 20,
+      "source": "claude input plus separately reported cache-read and cache-write tokens",
+      "limitation": null,
+      "latestProcessedInput": 32,
+      "visibleOutput": null,
+      "inputOutputTokens": null,
+      "outputSource": "Claude output_tokens without a separate preserved reasoning-output field",
+      "outputLimitation": "Visible output is unavailable because preserved Claude usage does not separate reasoning output."
+    }
+  },
+  "composition": [
+    {
+      "id": "composition.other",
+      "category": "other",
+      "name": "Other or unsupported",
+      "count": 3,
+      "value": 50,
+      "unit": "bytes",
+      "scope": "active_reconstructed_messages",
+      "evidence": "exact_serialized_local_representation",
+      "source": "UTF-8 bytes of mutually exclusive canonical classified values",
+      "share": 21.1
+    },
+    {
+      "id": "composition.user",
+      "category": "user",
+      "name": "User content",
+      "count": 1,
+      "value": 17,
+      "unit": "bytes",
+      "scope": "active_reconstructed_messages",
+      "evidence": "exact_serialized_local_representation",
+      "source": "UTF-8 bytes of mutually exclusive canonical classified values",
+      "share": 7.2
+    },
+    {
+      "id": "composition.tool_calls",
+      "category": "tool_calls",
+      "name": "Tool calls",
+      "count": 1,
+      "value": 97,
+      "unit": "bytes",
+      "scope": "active_reconstructed_messages",
+      "evidence": "exact_serialized_local_representation",
+      "source": "UTF-8 bytes of mutually exclusive canonical classified values",
+      "share": 40.9
+    },
+    {
+      "id": "composition.tool_results",
+      "category": "tool_results",
+      "name": "Tool results",
+      "count": 1,
+      "value": 73,
+      "unit": "bytes",
+      "scope": "active_reconstructed_messages",
+      "evidence": "exact_serialized_local_representation",
+      "source": "UTF-8 bytes of mutually exclusive canonical classified values",
+      "share": 30.8
+    }
+  ],
+  "contributors": [
+    {
+      "id": "tool-calls:tool-use:1",
+      "category": "tool_calls",
+      "type": "tool_use",
+      "value": 97,
+      "unit": "bytes",
+      "share": 40.9,
+      "scope": "active_reconstructed_messages",
+      "evidence": "exact_serialized_local_representation"
+    },
+    {
+      "id": "tool-results:tool-result:1",
+      "category": "tool_results",
+      "type": "tool_result",
+      "value": 73,
+      "unit": "bytes",
+      "share": 30.8,
+      "scope": "active_reconstructed_messages",
+      "evidence": "exact_serialized_local_representation"
+    },
+    {
+      "id": "other:message-metadata:1",
+      "category": "other",
+      "type": "message_metadata",
+      "value": 20,
+      "unit": "bytes",
+      "share": 8.4,
+      "scope": "active_reconstructed_messages",
+      "evidence": "exact_serialized_local_representation"
+    },
+    {
+      "id": "user:user-message:1",
+      "category": "user",
+      "type": "user_message",
+      "value": 17,
+      "unit": "bytes",
+      "share": 7.2,
+      "scope": "active_reconstructed_messages",
+      "evidence": "exact_serialized_local_representation"
+    },
+    {
+      "id": "other:message-metadata:2",
+      "category": "other",
+      "type": "message_metadata",
+      "value": 15,
+      "unit": "bytes",
+      "share": 6.3,
+      "scope": "active_reconstructed_messages",
+      "evidence": "exact_serialized_local_representation"
+    },
+    {
+      "id": "other:message-metadata:3",
+      "category": "other",
+      "type": "message_metadata",
+      "value": 15,
+      "unit": "bytes",
+      "share": 6.3,
+      "scope": "active_reconstructed_messages",
+      "evidence": "exact_serialized_local_representation"
+    }
+  ],
+  "activity": {
+    "available": true,
+    "repeatedCount": 0,
+    "repeatedFailures": [],
+    "unidentifiedFailureCount": 0,
+    "source": "Claude tool_result.is_error linked by tool_use_id",
+    "limitation": null
+  },
+  "measuredDrivers": [
+    {
+      "id": "driver.large_fresh_input",
+      "kind": "large_fresh_input_load",
+      "name": "Large fresh-input load",
+      "target": "cumulative_input_consumption",
+      "scope": "cumulative_inspected_session",
+      "unit": "tokens",
+      "evidence": "provider_reported",
+      "metricIds": [
+        "usage.cumulative.fresh_input",
+        "usage.cumulative.processed_input",
+        "session.model_calls"
+      ],
+      "contributorIds": [],
+      "impact": {
+        "value": 20,
+        "unit": "tokens",
+        "share": 62.5
+      },
+      "occurrenceCount": 1,
+      "observations": [
+        {
+          "name": "fresh_input",
+          "value": 20,
+          "unit": "tokens",
+          "source": "usage.cumulative.fresh_input"
+        },
+        {
+          "name": "processed_input",
+          "value": 32,
+          "unit": "tokens",
+          "source": "usage.cumulative.processed_input"
+        },
+        {
+          "name": "distinct_requests",
+          "value": 1,
+          "unit": "calls",
+          "source": "metrics.session.model_calls"
+        }
+      ],
+      "description": "20 provider-reported fresh or uncached tokens account for 62.5% of 32 processed input tokens across 1 observable model call(s).",
+      "limitation": "Fresh input establishes new input processing, but does not show that the material was unnecessary or identify a request-local contributor."
+    },
+    {
+      "id": "driver.large_active_contributor",
+      "kind": "large_active_contributor",
+      "name": "Large active contributor",
+      "target": "active_context_occupancy",
+      "scope": "active_reconstructed_messages",
+      "unit": "bytes",
+      "evidence": "exact_serialized_local_representation",
+      "metricIds": [
+        "active.serialized_bytes"
+      ],
+      "contributorIds": [
+        "tool-calls:tool-use:1"
+      ],
+      "impact": {
+        "value": 97,
+        "unit": "bytes",
+        "share": 40.9
+      },
+      "occurrenceCount": 1,
+      "observations": [
+        {
+          "name": "contributor_size",
+          "value": 97,
+          "unit": "bytes",
+          "source": "contributors.tool-calls:tool-use:1.value"
+        },
+        {
+          "name": "contributor_share",
+          "value": 40.9,
+          "unit": "percent",
+          "source": "contributors.tool-calls:tool-use:1.share"
+        }
+      ],
+      "description": "tool-calls:tool-use:1 is the largest measured contributor at 97 bytes (40.9% of active_reconstructed_messages).",
+      "limitation": "Size does not establish that this contributor is unnecessary or safe to reduce."
+    },
+    {
+      "id": "driver.context_reprocessing",
+      "kind": "context_reprocessing",
+      "name": "Context reprocessing",
+      "target": "cumulative_input_consumption",
+      "scope": "cumulative_inspected_session",
+      "unit": "tokens",
+      "evidence": "provider_reported",
+      "metricIds": [
+        "usage.cumulative.reprocessed_input",
+        "usage.cumulative.processed_input",
+        "session.model_calls"
+      ],
+      "contributorIds": [],
+      "impact": {
+        "value": 7,
+        "unit": "tokens",
+        "share": 21.9
+      },
+      "occurrenceCount": 1,
+      "observations": [
+        {
+          "name": "reprocessed_input",
+          "value": 7,
+          "unit": "tokens",
+          "source": "usage.cumulative.reprocessed_input"
+        },
+        {
+          "name": "processed_input",
+          "value": 32,
+          "unit": "tokens",
+          "source": "usage.cumulative.processed_input"
+        },
+        {
+          "name": "distinct_requests",
+          "value": 1,
+          "unit": "calls",
+          "source": "metrics.session.model_calls"
+        }
+      ],
+      "description": "7 provider-reported cached or cache-read tokens account for 21.9% of 32 processed input tokens across 1 observable model call(s).",
+      "limitation": "Provider-reported cache use establishes context reprocessing, but does not show that the retained context was unnecessary."
+    }
+  ],
+  "primaryMeasuredCauseId": "driver.large_fresh_input",
+  "observedRequest": null,
+  "limitations": [
+    "Claude's JSONL transcript does not expose the complete hidden system prompt or an exact current provider request.",
+    "CLAUDE.md and memory content may appear as attachments or message wrappers, but absence from this report does not prove absence from provider context.",
+    "Compaction may replace earlier detail with a persisted summary.",
+    "Some Claude usage records lacked requestId; those records were counted individually and may contain undetectable duplicates.",
+    "Composition measures reconstructed provider-facing persisted messages; hidden instructions, tool definitions, and unpersisted request fields are outside this scope.",
+    "Composition and contributors use UTF-8 bytes of a canonical classified local representation, not byte-for-byte JSONL size or per-item token counts.",
+    "Raw transcript, tool payload, command arguments, environment values, and reasoning text are omitted from this stats report."
+  ]
+}

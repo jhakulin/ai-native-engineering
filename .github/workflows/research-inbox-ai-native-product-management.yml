@@ -1,0 +1,171 @@
+name: AI Native Product Management Research Inbox Ingestion
+
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: research-inbox-ai-native-product-management
+  cancel-in-progress: false
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    env:
+      RESEARCH_TARGET: ai-native-product-management
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+
+      - name: Set research run identifiers
+        run: |
+          echo "RESEARCH_DATE=$(date -u +%F)" >> "$GITHUB_ENV"
+          echo "RESEARCH_RUN_ID=${GITHUB_RUN_ID}" >> "$GITHUB_ENV"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Resolve and validate repository context
+        run: |
+          set -euo pipefail
+          resolved_sha="$(git rev-parse HEAD)"
+          test "$resolved_sha" = "$GITHUB_SHA"
+          echo "RESEARCH_SOURCE_SHA=$resolved_sha" >> "$GITHUB_ENV"
+          node scripts/validate-context-manifest.js
+
+      - name: Check required source-gathering secrets
+        run: |
+          missing=0
+          for name in YOUTUBE_API_KEY WEBSHARE_PROXY_USERNAME WEBSHARE_PROXY_PASSWORD OPENAI_API_KEY; do
+            if [ -z "${!name:-}" ]; then
+              echo "Missing required secret: ${name}" >&2
+              missing=1
+            fi
+          done
+          exit "$missing"
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          WEBSHARE_PROXY_USERNAME: ${{ secrets.WEBSHARE_PROXY_USERNAME }}
+          WEBSHARE_PROXY_PASSWORD: ${{ secrets.WEBSHARE_PROXY_PASSWORD }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+      - name: Plan dynamic YouTube queries with web search
+        run: node scripts/plan-research-youtube-queries.js "$RESEARCH_TARGET"
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          RESEARCH_QUERY_PLANNER_MODEL: ${{ vars.RESEARCH_QUERY_PLANNER_MODEL || vars.RESEARCH_SELECTION_MODEL || 'gpt-5.1' }}
+
+      - name: Validate dynamic query plan
+        run: node scripts/validate-research-query-plan.js "$RESEARCH_TARGET"
+
+      - name: Gather YouTube candidates
+        run: node scripts/search-research-youtube-candidates.js "$RESEARCH_TARGET"
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+
+      - name: Record pre-selection workspace state
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          root = Path.cwd()
+          state = {}
+          for path in root.rglob('*'):
+              rel = path.relative_to(root).as_posix()
+              if rel == '.git' or rel.startswith('.git/'):
+                  continue
+              if path.is_symlink():
+                  state[rel] = {'type': 'symlink'}
+              elif path.is_file():
+                  state[rel] = {'type': 'file', 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()}
+          Path('/tmp/research-selection-baseline.json').write_text(json.dumps(state, sort_keys=True), encoding='utf-8')
+          PY
+
+      - name: Select videos for transcription with LLM
+        run: node scripts/select-research-videos.js "$RESEARCH_TARGET"
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          RESEARCH_SELECTION_MODEL: ${{ vars.RESEARCH_SELECTION_MODEL || 'gpt-5.1' }}
+
+      - name: Guard LLM selection file changes
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          import json
+          import os
+          import sys
+          from pathlib import Path
+
+          root = Path.cwd()
+          allowed = f"research/inbox/{os.environ['RESEARCH_TARGET']}/{os.environ['RESEARCH_DATE']}/run-{os.environ['RESEARCH_RUN_ID']}/selected-videos.json"
+          before = json.loads(Path('/tmp/research-selection-baseline.json').read_text(encoding='utf-8'))
+          after = {}
+          for path in root.rglob('*'):
+              rel = path.relative_to(root).as_posix()
+              if rel == '.git' or rel.startswith('.git/'):
+                  continue
+              if path.is_symlink():
+                  after[rel] = {'type': 'symlink'}
+              elif path.is_file():
+                  after[rel] = {'type': 'file', 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()}
+          violations = []
+          for rel in sorted(set(before) | set(after)):
+              if rel == allowed:
+                  continue
+              if before.get(rel) != after.get(rel):
+                  violations.append(rel)
+          if violations:
+              print('LLM selection step changed files outside the allowed selection file:', file=sys.stderr)
+              for item in violations:
+                  print(f'- {item}', file=sys.stderr)
+              print(f'Allowed file: {allowed}', file=sys.stderr)
+              sys.exit(1)
+          print(f'LLM selection file-change guard passed. Allowed change: {allowed}')
+          PY
+
+      - name: Validate selected videos
+        run: node scripts/validate-selected-videos.js "$RESEARCH_TARGET"
+
+      - name: Fetch selected transcripts
+        run: node scripts/fetch-selected-transcripts.js "$RESEARCH_TARGET"
+        env:
+          WEBSHARE_PROXY_USERNAME: ${{ secrets.WEBSHARE_PROXY_USERNAME }}
+          WEBSHARE_PROXY_PASSWORD: ${{ secrets.WEBSHARE_PROXY_PASSWORD }}
+          WEBSHARE_PROXY_LOCATIONS: ${{ vars.WEBSHARE_PROXY_LOCATIONS || 'us,ca' }}
+
+      - name: Write selection summary
+        run: node scripts/write-research-inbox-summary.js "$RESEARCH_TARGET"
+
+      - name: Validate research inbox
+        run: node scripts/validate-research-inbox.js "$RESEARCH_TARGET"
+
+      - name: Update research history
+        run: node scripts/update-research-inbox-history.js "$RESEARCH_TARGET"
+
+      - name: Update latest inbox pointer
+        run: node scripts/update-research-inbox-latest.js "$RESEARCH_TARGET"
+
+      - name: Prune old research inbox runs
+        run: node scripts/prune-research-inbox.js "$RESEARCH_TARGET"
+
+      - name: Create research inbox pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: Add ${{ env.RESEARCH_TARGET }} research inbox for ${{ env.RESEARCH_DATE }} run-${{ env.RESEARCH_RUN_ID }}
+          title: Add ${{ env.RESEARCH_TARGET }} research inbox for ${{ env.RESEARCH_DATE }} run-${{ env.RESEARCH_RUN_ID }}
+          body-path: research/inbox/${{ env.RESEARCH_TARGET }}/${{ env.RESEARCH_DATE }}/run-${{ env.RESEARCH_RUN_ID }}/selection-summary.md
+          branch: research-inbox/${{ env.RESEARCH_TARGET }}-${{ env.RESEARCH_DATE }}-${{ env.RESEARCH_RUN_ID }}
+          base: main
+          delete-branch: true
+          add-paths: |
+            research/inbox/${{ env.RESEARCH_TARGET }}/
+            research-history/${{ env.RESEARCH_TARGET }}/sources.jsonl

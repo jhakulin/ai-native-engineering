@@ -1,0 +1,89 @@
+{
+  "name": "knowledge-graphs-software-repositories",
+  "title": "Knowledge Graphs For Software Repositories Research Inbox",
+  "brief_title": "Knowledge Graphs For Software Repositories Research Brief",
+  "analysis_focus": ["practical repository knowledge graphs", "code and dependency relationships", "architecture discovery", "impact analysis benchmarks", "incremental indexing", "cross-system engineering context", "permissions", "operational cost"],
+  "description": "Track practical knowledge graph solutions for software repositories, including measured code retrieval and impact analysis, incremental indexing, architecture discovery, and permission-aware connections among repositories, Jira, Confluence, and engineering ownership data. Prefer concrete implementations, benchmarks, operational costs, and adoption evidence over generic knowledge-graph or graph-memory material.",
+  "idea_output": {
+    "directory": "ideas/knowledge-graphs-software-repositories"
+  },
+  "facets": [
+    "enterprise_knowledge_graphs",
+    "software_repository_graphs",
+    "code_and_dependency_relationships",
+    "architecture_discovery",
+    "repository_semantics",
+    "impact_analysis",
+    "graph_governance",
+    "adoption_patterns",
+    "comparative_benchmarks",
+    "incremental_indexing",
+    "cross_system_traceability",
+    "enterprise_context_integration",
+    "permission_propagation",
+    "operational_cost"
+  ],
+  "current_context": {
+    "include": [
+      "AGENTS.md",
+      "CLAUDE.md",
+      "README.md",
+      "guidelines/*.md",
+      "skills/*/SKILL.md",
+      "strategies/*.md"
+    ],
+    "exclude": [
+      "**/.env",
+      "**/node_modules/**",
+      "**/.git/**",
+      "research/**",
+      "research-history/**",
+      "research-targets/**"
+    ]
+  },
+  "dynamic_query_planning": {
+    "enabled": true,
+    "use_web_search": true,
+    "max_dynamic_queries": 2,
+    "max_results": 6,
+    "candidate_pool": 12,
+    "sort": "latest",
+    "max_query_terms": 5
+  },
+  "youtube_searches": [
+    {
+      "query": "codebase knowledge graph benchmark",
+      "sort": "latest",
+      "max_results": 6,
+      "candidate_pool": 12
+    },
+    {
+      "query": "repository graph impact analysis",
+      "sort": "latest",
+      "max_results": 6,
+      "candidate_pool": 12
+    },
+    {
+      "query": "Jira Confluence repository context graph",
+      "sort": "latest",
+      "max_results": 6,
+      "candidate_pool": 12
+    }
+  ],
+  "source_limits": {
+    "max_video_transcripts": 6
+  },
+  "selection": {
+    "min_duration_seconds": 300
+  },
+  "source_history": {
+    "path": "research-history/knowledge-graphs-software-repositories/sources.jsonl",
+    "exclude_previously_used": true,
+    "allow_reuse_after_days": 90
+  },
+  "retention": {
+    "enabled": false,
+    "keep_latest_runs": 3,
+    "delete_runs_older_than_days": 7
+  }
+}

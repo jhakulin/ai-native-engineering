@@ -1,0 +1,16 @@
+{
+  "name": "pi-context-review-extension",
+  "version": "0.1.0",
+  "description": "Pi extension for reviewing preserved session context and the latest provider payload.",
+  "type": "module",
+  "license": "MIT",
+  "files": ["index.ts", "context-review.mjs", "context-review/*.mjs", "advisor.md", "advisor-output-schema.json", "README.md", "SPEC.md"],
+  "pi": {
+    "extensions": ["./index.ts"]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*"
+  }
+}

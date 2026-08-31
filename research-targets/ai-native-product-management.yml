@@ -1,0 +1,94 @@
+{
+  "name": "ai-native-product-management",
+  "title": "AI Native Product Management Research Inbox",
+  "brief_title": "AI Native Product Management Research Brief",
+  "analysis_focus": ["practical product discovery", "PM architect engineer workflows", "product-engineering handoffs", "prototype-based decisions", "Jira Confluence GitHub Teams integration", "decision traceability", "metrics", "governance"],
+  "description": "Track practical AI-native product management workflows: product discovery, collaboration among product managers, architects, and engineers, prototype-based decisions, product-to-engineering handoffs, and permission-aware use of Jira, Confluence, GitHub, and Microsoft Teams. Prefer concrete case studies, operating examples, decision evidence, and measurable outcomes over generic product-management or AI commentary.",
+  "idea_output": {
+    "directory": "ideas/ai-native-product-management"
+  },
+  "facets": [
+    "product_discovery",
+    "product_delivery",
+    "pm_agent_workflows",
+    "engineering_collaboration",
+    "management_operating_model",
+    "metrics_governance",
+    "adoption_change_management",
+    "product_engineering_handoffs",
+    "architecture_collaboration",
+    "decision_traceability",
+    "work_management_integration",
+    "prototype_based_decisions",
+    "practical_case_studies"
+  ],
+  "current_context": {
+    "include": [
+      "AGENTS.md",
+      "CLAUDE.md",
+      "README.md",
+      "guidelines/*.md",
+      "skills/*/SKILL.md",
+      "strategies/*.md"
+    ],
+    "exclude": [
+      "**/.env",
+      "**/node_modules/**",
+      "**/.git/**",
+      "research/**",
+      "research-history/**",
+      "research-targets/**"
+    ]
+  },
+  "dynamic_query_planning": {
+    "enabled": true,
+    "use_web_search": true,
+    "max_dynamic_queries": 2,
+    "max_results": 6,
+    "candidate_pool": 12,
+    "sort": "latest",
+    "max_query_terms": 5
+  },
+  "youtube_searches": [
+    {
+      "query": "AI product discovery case study",
+      "sort": "latest",
+      "max_results": 6,
+      "candidate_pool": 12
+    },
+    {
+      "query": "product manager architect engineer AI",
+      "sort": "latest",
+      "max_results": 6,
+      "candidate_pool": 12
+    },
+    {
+      "query": "Jira Confluence product engineering AI",
+      "sort": "latest",
+      "max_results": 6,
+      "candidate_pool": 12
+    },
+    {
+      "query": "Microsoft Teams product management AI",
+      "sort": "latest",
+      "max_results": 6,
+      "candidate_pool": 12
+    }
+  ],
+  "source_limits": {
+    "max_video_transcripts": 6
+  },
+  "selection": {
+    "min_duration_seconds": 300
+  },
+  "source_history": {
+    "path": "research-history/ai-native-product-management/sources.jsonl",
+    "exclude_previously_used": true,
+    "allow_reuse_after_days": 90
+  },
+  "retention": {
+    "enabled": false,
+    "keep_latest_runs": 3,
+    "delete_runs_older_than_days": 7
+  }
+}

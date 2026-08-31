@@ -1,0 +1,8 @@
+{"timestamp":"2026-08-15T10:00:00Z","type":"session_meta","payload":{"session_id":"codex-session","cwd":"/workspace/demo","cli_version":"0.141.0","base_instructions":{"text":"Base Codex instructions"}}}
+{"timestamp":"2026-08-15T10:00:00Z","type":"turn_context","payload":{"model":"codex-fixture-model","effort":"low"}}
+{"timestamp":"2026-08-15T10:00:01Z","type":"response_item","payload":{"type":"message","role":"developer","content":[{"type":"input_text","text":"Read AGENTS.md"}]}}
+{"timestamp":"2026-08-15T10:00:02Z","type":"response_item","payload":{"type":"message","role":"user","content":[{"type":"input_text","text":"Review the code"}]}}
+{"timestamp":"2026-08-15T10:00:03Z","type":"response_item","payload":{"type":"custom_tool_call","call_id":"call-1","name":"read_file","input":"{\"path\":\"/workspace/demo/AGENTS.md\"}"}}
+{"timestamp":"2026-08-15T10:00:04Z","type":"response_item","payload":{"type":"custom_tool_call_output","call_id":"call-1","output":"Agent guidance"}}
+{"timestamp":"2026-08-15T10:00:05Z","type":"response_item","payload":{"type":"custom_tool_call","call_id":"call-2","name":"exec_command","input":"{\"cmd\":\"sed -n '1,120p' docs/architecture.md\"}"}}
+{"timestamp":"2026-08-15T10:00:06Z","type":"event_msg","payload":{"type":"token_count","info":{"model_context_window":200000,"last_token_usage":{"input_tokens":100,"cached_input_tokens":60,"cache_write_input_tokens":7,"output_tokens":9,"reasoning_output_tokens":3,"total_tokens":109},"total_token_usage":{"input_tokens":250,"cached_input_tokens":140,"cache_write_input_tokens":11,"output_tokens":20,"reasoning_output_tokens":8,"total_tokens":270}}}}
