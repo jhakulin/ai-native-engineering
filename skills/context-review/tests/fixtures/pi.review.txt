@@ -1,0 +1,58 @@
+# Context review
+
+Agent: pi
+Session: <fixture>
+Session ID: pi-session
+Working directory: /workspace/demo
+Scope: preserved local evidence; not a guaranteed byte-for-byte current provider request
+
+## Persisted instructions
+(none found)
+
+## Messages
+
+1. [exact-persisted-transcript] user @ 2026-08-15T10:00:01Z
+```
+Review the code
+```
+
+2. [exact-persisted-transcript] assistant @ 2026-08-15T10:00:02Z
+```
+[tool call: read]
+```
+
+3. [exact-persisted-transcript] toolResult @ 2026-08-15T10:00:03Z
+```
+Agent guidance
+```
+
+## File access evidence
+- [reconstructed-from-persisted-tool-call] /workspace/demo/AGENTS.md via read
+
+## Referenced resources
+(no URL/URI arguments found)
+
+## Tool calls
+
+1. [exact-persisted] read
+```
+{
+  "path": "/workspace/demo/AGENTS.md"
+}
+```
+Result:
+```
+Agent guidance
+```
+
+## Compaction
+(none found)
+
+## Branch summaries
+(none found)
+
+## Unavailable or uncertain context
+- The JSONL report reconstructs Pi's session branch; it is not the final serialized provider request.
+- When the Pi context-review extension is loaded, /context-review can additionally show the exact latest payload observed by its provider-request hook.
+- Payload changes made by extensions loaded after context-review are not visible to its hook.
+- Unsupported Pi record types are omitted from the reconstructed branch.

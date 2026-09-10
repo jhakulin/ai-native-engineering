@@ -1,0 +1,4 @@
+.github/workflows/*.lock.yml linguist-generated=true merge=ours
+skills/context-review/tests/fixtures/*.jsonl text eol=lf
+skills/context-review/tests/fixtures/*.review.txt text eol=lf
+skills/context-review/tests/fixtures/*.stats.json text eol=lf

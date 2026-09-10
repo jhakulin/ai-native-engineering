@@ -1,0 +1,106 @@
+{
+  "name": "ai-native-engineering",
+  "title": "AI Native Engineering Research Inbox",
+  "brief_title": "AI Native Engineering Research Brief",
+  "analysis_focus": ["practical engineering workflows", "repository documentation", "context and token optimization", "PM architect engineer collaboration", "Jira GitHub Confluence Teams integration", "production agent operations", "evaluation", "governance"],
+  "description": "Track practical and measurable AI-native engineering workflows: AI-ready repository documentation, context and token optimization, collaboration among product managers, architects, and engineers, integrations with Jira, GitHub, Confluence, and Microsoft Teams, production agent operations, evaluation, governance, and adoption. Prefer concrete examples, configurations, before-and-after evidence, and reusable operating patterns over generic AI commentary or one-tool advocacy.",
+  "current_context": {
+    "include": [
+      "AGENTS.md",
+      "CLAUDE.md",
+      "README.md",
+      "guidelines/claude-code-engineering-guideline.md",
+      "guidelines/*.md",
+      "skills/*/SKILL.md",
+      "strategies/*.md"
+    ],
+    "exclude": [
+      "**/.env",
+      "**/node_modules/**",
+      "**/.git/**",
+      "research/**",
+      "research-history/**",
+      "research-targets/**"
+    ]
+  },
+  "idea_output": {
+    "directory": "ideas/ai-native-engineering"
+  },
+  "facets": [
+    "implementation",
+    "evaluation",
+    "security",
+    "governance",
+    "adoption",
+    "failure_modes",
+    "loop_engineering",
+    "claude_code_configuration",
+    "team_configuration",
+    "permissions_and_safety",
+    "context_management",
+    "practical_workflow_examples",
+    "repository_documentation",
+    "context_and_token_optimization",
+    "cross_role_collaboration",
+    "engineering_tool_integrations",
+    "production_agent_operations",
+    "legacy_repository_optimization"
+  ],
+  "dynamic_query_planning": {
+    "enabled": true,
+    "use_web_search": true,
+    "max_dynamic_queries": 2,
+    "max_results": 6,
+    "candidate_pool": 12,
+    "sort": "latest",
+    "max_query_terms": 5
+  },
+  "youtube_searches": [
+    {
+      "query": "AI ready repository documentation",
+      "sort": "latest",
+      "max_results": 6,
+      "candidate_pool": 12
+    },
+    {
+      "query": "coding agent token optimization",
+      "sort": "latest",
+      "max_results": 6,
+      "candidate_pool": 12
+    },
+    {
+      "query": "product engineering coding agents",
+      "sort": "latest",
+      "max_results": 6,
+      "candidate_pool": 12
+    },
+    {
+      "query": "Jira GitHub coding agent workflow",
+      "sort": "latest",
+      "max_results": 6,
+      "candidate_pool": 12
+    },
+    {
+      "query": "Confluence Microsoft Teams AI engineering",
+      "sort": "latest",
+      "max_results": 6,
+      "candidate_pool": 12
+    }
+  ],
+  "source_limits": {
+    "max_video_transcripts": 6
+  },
+  "selection": {
+    "min_duration_seconds": 300
+  },
+  "source_history": {
+    "path": "research-history/ai-native-engineering/sources.jsonl",
+    "exclude_previously_used": true,
+    "allow_reuse_after_days": 90
+  },
+  "retention": {
+    "enabled": false,
+    "keep_latest_runs": 3,
+    "delete_runs_older_than_days": 7
+  }
+}
