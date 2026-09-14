@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-08-16",
+  "testedHarnessVersions": {
+    "codex": "codex-cli 0.147.0",
+    "claude": "Claude Code 2.1.114",
+    "pi": "0.80.6"
+  },
+  "fixtures": {
+    "codex.jsonl": "synthetic rollout shaped from sanitized field-name evidence; not emitted by the tested CLI",
+    "claude.jsonl": "synthetic transcript shaped from sanitized field-name evidence; no harness-version field is asserted",
+    "pi.jsonl": "synthetic Pi session-format v3 transcript"
+  }
+}

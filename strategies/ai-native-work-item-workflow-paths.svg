@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1012" viewBox="0 0 1200 1012" role="img" aria-labelledby="title description">
+  <title id="title">AI-assisted and AI-native work-item paths side by side</title>
+  <desc id="description">Two side-by-side paths move from Jira Epic intent to Jira Story specification, technical planning and local verification in a workspace for an existing GitHub repository, and GitHub pull request review and merge. Scoped Teams conversations can supply input and clarification across both paths. The AI-assisted path is human-led. In the AI-native path, an agent drafts and clarifies the Story with humans, prepares a technical plan with human acceptance when required, and implements within approved scope.</desc>
+  <rect width="1200" height="1012" fill="#ffffff"/>
+
+  <rect x="24" y="20" width="552" height="104" rx="18" fill="#e9f2fc"/>
+  <text x="52" y="65" fill="#174a78" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="700">AI-assisted</text>
+  <text x="52" y="99" fill="#27445f" font-family="Arial, Helvetica, sans-serif" font-size="22">Human directs each stage</text>
+
+  <rect x="624" y="20" width="552" height="104" rx="18" fill="#e7f5ee"/>
+  <text x="652" y="65" fill="#155541" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="700">AI-native</text>
+  <text x="652" y="99" fill="#285346" font-family="Arial, Helvetica, sans-serif" font-size="22">Bounded agent work, human decisions</text>
+
+  <g fill="#ffffff" stroke="#8db6d8" stroke-width="3">
+    <rect x="24" y="154" width="552" height="126" rx="14"/>
+    <rect x="24" y="310" width="552" height="150" rx="14"/>
+    <rect x="24" y="490" width="552" height="126" rx="14"/>
+    <rect x="24" y="646" width="552" height="126" rx="14"/>
+    <rect x="24" y="802" width="552" height="126" rx="14"/>
+  </g>
+  <g fill="#ffffff" stroke="#83bea8" stroke-width="3">
+    <rect x="624" y="154" width="552" height="126" rx="14"/>
+    <rect x="624" y="310" width="552" height="150" rx="14"/>
+    <rect x="624" y="490" width="552" height="126" rx="14"/>
+    <rect x="624" y="646" width="552" height="126" rx="14"/>
+    <rect x="624" y="802" width="552" height="126" rx="14"/>
+  </g>
+
+  <g stroke="#326a9c" stroke-width="4" fill="none">
+    <path d="M300 284 V292"/>
+    <path d="M300 464 V472"/>
+    <path d="M300 620 V628"/>
+    <path d="M300 776 V784"/>
+  </g>
+  <g fill="#326a9c">
+    <path d="M291 291 L300 304 L309 291 Z"/>
+    <path d="M291 471 L300 484 L309 471 Z"/>
+    <path d="M291 627 L300 640 L309 627 Z"/>
+    <path d="M291 783 L300 796 L309 783 Z"/>
+  </g>
+  <g stroke="#20765f" stroke-width="4" fill="none">
+    <path d="M900 284 V292"/>
+    <path d="M900 464 V472"/>
+    <path d="M900 620 V628"/>
+    <path d="M900 776 V784"/>
+  </g>
+  <g fill="#20765f">
+    <path d="M891 291 L900 304 L909 291 Z"/>
+    <path d="M891 471 L900 484 L909 471 Z"/>
+    <path d="M891 627 L900 640 L909 627 Z"/>
+    <path d="M891 783 L900 796 L909 783 Z"/>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700" fill="#174a78">
+    <text x="52" y="193">1. Jira Epic</text>
+    <text x="52" y="349">2. Jira Story</text>
+    <text x="52" y="529">3. Local repository workspace: plan</text>
+    <text x="52" y="685">4. Implement and verify</text>
+    <text x="52" y="841">5. GitHub PR</text>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#253849">
+    <text x="52" y="227">Human frames why and high-level what.</text>
+    <text x="52" y="383">Human writes the spec with AI help:</text>
+    <text x="52" y="413">scenarios, data/interfaces, quality.</text>
+    <text x="52" y="563">Engineer plans against approved Story;</text>
+    <text x="52" y="593">human reviews consequential choices.</text>
+    <text x="52" y="719">Engineer directs AI; reviews changes,</text>
+    <text x="52" y="749">runs tests and static analysis.</text>
+    <text x="52" y="875">Engineer drives PR review and fixes;</text>
+    <text x="52" y="905">human authorizes merge.</text>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700" fill="#155541">
+    <text x="652" y="193">1. Jira Epic</text>
+    <text x="652" y="349">2. Jira Story</text>
+    <text x="652" y="529">3. Local repository workspace: plan</text>
+    <text x="652" y="685">4. Implement and verify</text>
+    <text x="652" y="841">5. GitHub PR</text>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#253849">
+    <text x="652" y="227">Human owns why and high-level what;</text>
+    <text x="652" y="257">agent may suggest Story boundaries.</text>
+    <text x="652" y="383">Agent drafts from human input + template;</text>
+    <text x="652" y="412">clarifies and aligns with humans;</text>
+    <text x="652" y="441">humans iterate and approve the ready spec.</text>
+    <text x="652" y="563">Agent drafts technical plan;</text>
+    <text x="652" y="593">human accepts when required.</text>
+    <text x="652" y="719">Agent implements approved scope;</text>
+    <text x="652" y="749">reviews, fixes, tests, static analysis.</text>
+    <text x="652" y="875">Agent handles eligible PR feedback;</text>
+    <text x="652" y="905">merge needs authorized approval.</text>
+  </g>
+
+  <text x="24" y="983" fill="#526477" font-family="Arial, Helvetica, sans-serif" font-size="20">Teams supplies input and human clarification.</text>
+  <text x="624" y="983" fill="#526477" font-family="Arial, Helvetica, sans-serif" font-size="20">Teams supplies input and agent updates; Jira links decisions.</text>
+</svg>

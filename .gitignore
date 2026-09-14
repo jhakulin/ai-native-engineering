@@ -1,0 +1,7 @@
+.env
+.env.*
+!.env.example
+/context-review.md
+skills/get-youtube-transcription/.env
+skills/get-youtube-transcription/.env.local
+node_modules/

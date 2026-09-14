@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-08-16",
+  "privacy": "Field names and record shapes only; session identifiers, paths, transcript content, models, usage values, and credentials were not retained.",
+  "codex": {
+    "version": "field inspection on codex-cli 0.141.0; interactive release check on codex-cli 0.147.0",
+    "observedFields": [
+      "session_meta.payload.session_id",
+      "session_meta.payload.cwd",
+      "session_meta.payload.cli_version",
+      "turn_context.payload.model",
+      "turn_context.payload.effort",
+      "event_msg.payload.info.last_token_usage.input_tokens",
+      "event_msg.payload.info.last_token_usage.cached_input_tokens",
+      "event_msg.payload.info.last_token_usage.cache_write_input_tokens",
+      "event_msg.payload.info.last_token_usage.output_tokens",
+      "event_msg.payload.info.last_token_usage.reasoning_output_tokens",
+      "event_msg.payload.info.last_token_usage.total_tokens",
+      "event_msg.payload.info.total_token_usage",
+      "event_msg.payload.info.model_context_window",
+      "compacted.payload.replacement_history"
+    ],
+    "standaloneCurrentSessionCheck": "passed with current_directory selection and provider-reported usage",
+    "manualInteractiveCheck": "stats, JSON, and advise routing passed on Codex CLI 0.147.0 with the active configured model; each invocation selected harness codex and reached the canonical parser",
+    "releaseGate": "passed on Codex CLI 0.147.0"
+  },
+  "claude": {
+    "version": "Claude Code 2.1.114",
+    "observedFields": [
+      "sessionId",
+      "cwd",
+      "uuid",
+      "parentUuid",
+      "assistant.message.model",
+      "assistant.message.usage.input_tokens",
+      "assistant.message.usage.cache_creation_input_tokens",
+      "assistant.message.usage.cache_read_input_tokens",
+      "assistant.message.usage.output_tokens"
+    ],
+    "standaloneCurrentSessionCheck": "no cwd-matching session was available; fallback was correctly labelled",
+    "manualInteractiveCheck": "stats, JSON, and advise routing passed with Claude Sonnet 4.6; each invocation selected harness claude and reached the canonical parser",
+    "presentationLimitation": "The complete deterministic report is canonical in the expandable Bash tool result. Claude may add a non-authoritative summary afterward; this disclosed limitation is accepted for Phase 1.",
+    "releaseGate": "passed with disclosed model-mediated presentation limitation"
+  },
+  "pi": {
+    "version": "0.80.6",
+    "documentation": "session-format.md version 3 and ExtensionContext SessionManager API",
+    "observedFields": [
+      "session.version",
+      "entry.id",
+      "entry.parentId",
+      "compaction.firstKeptEntryId",
+      "message.message.usage.input",
+      "message.message.usage.output",
+      "message.message.usage.cacheRead",
+      "message.message.usage.cacheWrite",
+      "message.message.usage.reasoning",
+      "message.message.usage.totalTokens"
+    ],
+    "manualInteractiveCheck": "fresh-session, persisted-session, JSON, and exact-observed provider-request composition checks passed; request composition remained separate from response usage"
+  }
+}
