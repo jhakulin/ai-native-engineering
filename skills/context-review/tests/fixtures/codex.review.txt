@@ -1,0 +1,70 @@
+# Context review
+
+Agent: codex
+Session: <fixture>
+Session ID: codex-session
+Working directory: /workspace/demo
+Scope: preserved local evidence; not a guaranteed byte-for-byte current provider request
+
+## Persisted instructions
+
+[exact-persisted] base instructions — session_meta.payload.base_instructions
+```
+Base Codex instructions
+```
+
+[exact-persisted] developer message — response_item.message.developer
+```
+Read AGENTS.md
+```
+
+## Messages
+
+1. [exact-persisted-transcript] developer @ 2026-08-15T10:00:01Z
+```
+Read AGENTS.md
+```
+
+2. [exact-persisted-transcript] user @ 2026-08-15T10:00:02Z
+```
+Review the code
+```
+
+## File access evidence
+- [reconstructed-from-persisted-tool-call] /workspace/demo/AGENTS.md via read_file
+- [reconstructed-from-persisted-read-or-search-command; certainty=likely] docs/architecture.md via exec_command
+
+## Referenced resources
+(no URL/URI arguments found)
+
+## Tool calls
+
+1. [exact-persisted] read_file
+```
+{
+  "path": "/workspace/demo/AGENTS.md"
+}
+```
+Result:
+```
+Agent guidance
+```
+
+2. [exact-persisted] exec_command
+```
+{
+  "cmd": "sed -n '1,120p' docs/architecture.md"
+}
+```
+
+## Compaction
+(none found)
+
+## Branch summaries
+(none found)
+
+## Unavailable or uncertain context
+- Unsupported Codex record type: event_msg
+- The rollout is a persisted transcript, not a byte-for-byte dump of the latest provider request.
+- Content removed before persistence or discarded by compaction cannot be recovered unless a summary was saved.
+- A referenced documentation path is not considered read unless tool evidence records access to it.

@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "purpose": "Review changes to the review workflow against its maintained plan, and assess other changes for bounded source-level defects. This is not the complete specialist-review profile.",
+  "limits": {
+    "max_files": 100,
+    "max_diff_bytes": 196608,
+    "max_context_bytes": 131072
+  },
+  "criteria": [
+    {
+      "id": "REVIEW-REPORT-ONLY",
+      "kind": "requirement",
+      "description": "The review-only workflow declares read-only GitHub access and does not enable repair, approval, or merge publication capabilities.",
+      "source": { "origin": "shared", "path": "plans/reusable-change-review-workflow.md", "revision": "release" },
+      "required": true,
+      "path_prefixes": [".github/workflows/review", ".github/aw/review", "scripts/review-change", "review.config.json"],
+      "required_methods": ["review"],
+      "evidence_requirement": "Cite the relevant workflow or helper changes against the maintained review-only authority boundary. Static review is not a runtime containment claim."
+    },
+    {
+      "id": "REVIEW-EVIDENCE",
+      "kind": "requirement",
+      "description": "Changes to review preparation or reporting preserve the distinction between prepared facts, model claims, execution evidence, acceptance readiness, and human merge authority.",
+      "source": { "origin": "shared", "path": "plans/reusable-change-review-workflow.md", "revision": "release" },
+      "required": true,
+      "path_prefixes": [".github/aw/review", "scripts/review-change", "review.config.json"],
+      "required_methods": ["review"],
+      "evidence_requirement": "Cite relevant changed validation/reporting behavior and identify missing proof explicitly. Do not certify all of the broader plan or unspecified change requirements."
+    },
+    {
+      "id": "QUALITY-SCOPE",
+      "kind": "quality",
+      "description": "The changed source has no identified material contradiction with the explicitly configured review purpose and criterion sources.",
+      "source": { "origin": "shared", "path": "plans/reusable-change-review-workflow.md", "revision": "release" },
+      "required": true,
+      "path_prefixes": [],
+      "required_methods": ["review"],
+      "evidence_requirement": "Provide bounded source citations and explain uncertainties; an absence of findings does not demonstrate runtime correctness."
+    }
+  ],
+  "context": [],
+  "ci": [],
+  "human_approvers": []
+}

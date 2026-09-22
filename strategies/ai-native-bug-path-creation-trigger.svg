@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1040" viewBox="0 0 1200 1040" role="img" aria-labelledby="title description">
+  <title id="title">AI-native bug path: diagnose and approve scope before code changes</title>
+  <desc id="description">A human or AI agent creates a Jira Bug, triggering investigation in approved repositories, supported by catalog and code-graph candidates when available. Human acceptance of diagnosis and scope leads to bounded implementation and verification, then a draft GitHub pull request and authorized merge. The Bug owner identifies who verifies resolution afterward. When configured, an authorized agent can post concise Bug and investigation updates with links to a designated Teams channel. A branch from the human gate shows needs-information, blocked, no-action, or non-code outcomes without a pull request. New information or a changed repository baseline prompts revalidation; material changes require renewed human acceptance, and triage restarts when the diagnosis may no longer hold.</desc>
+  <rect width="1200" height="1040" fill="#ffffff"/>
+  <rect x="24" y="20" width="1152" height="92" rx="18" fill="#e9f2fc"/>
+  <text x="52" y="62" fill="#174a78" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="700">Bug path: diagnose and approve scope before code changes</text>
+  <text x="52" y="94" fill="#27445f" font-family="Arial, Helvetica, sans-serif" font-size="21">The cause and affected repository may be unknown at intake.</text>
+
+  <g fill="#ffffff" stroke-width="3">
+    <rect x="64" y="142" width="744" height="120" rx="16" stroke="#8db6d8"/>
+    <rect x="64" y="298" width="744" height="150" rx="16" stroke="#83bea8"/>
+    <rect x="64" y="484" width="744" height="140" rx="16" stroke="#d3ae65"/>
+    <rect x="64" y="660" width="744" height="146" rx="16" stroke="#83bea8"/>
+    <rect x="64" y="842" width="744" height="146" rx="16" stroke="#8db6d8"/>
+    <rect x="838" y="142" width="338" height="306" rx="16" fill="#f4f9ff" stroke="#8db6d8"/>
+    <rect x="838" y="484" width="338" height="140" rx="16" fill="#fff8e9" stroke="#d3ae65"/>
+  </g>
+
+  <g stroke="#426278" stroke-width="4" fill="none">
+    <path d="M436 265 V282"/>
+    <path d="M436 451 V468"/>
+    <path d="M436 627 V644"/>
+    <path d="M436 809 V826"/>
+    <path d="M811 202 H821"/>
+    <path d="M811 373 H821"/>
+    <path d="M811 554 H821"/>
+  </g>
+  <g fill="#426278">
+    <path d="M426 282 L436 295 L446 282 Z"/>
+    <path d="M426 468 L436 481 L446 468 Z"/>
+    <path d="M426 644 L436 657 L446 644 Z"/>
+    <path d="M426 826 L436 839 L446 826 Z"/>
+    <path d="M821 192 L835 202 L821 212 Z"/>
+    <path d="M821 363 L835 373 L821 383 Z"/>
+    <path d="M821 544 L835 554 L821 564 Z"/>
+  </g>
+  <path d="M61 734 H30 V554 H49" fill="none" stroke="#906236" stroke-width="3" stroke-dasharray="9 7"/>
+  <path d="M49 544 L62 554 L49 564 Z" fill="#906236"/>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700">
+    <text x="96" y="183" fill="#174a78">1. Jira Bug intake</text>
+    <text x="96" y="339" fill="#155541">2. Investigate and diagnose</text>
+    <text x="96" y="525" fill="#825822">3. Human accepts diagnosis and plan</text>
+    <text x="96" y="701" fill="#155541">4. Implement and verify</text>
+    <text x="96" y="883" fill="#174a78">5. GitHub PR and resolution</text>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#253849">
+    <text x="96" y="218">Human or AI agent records behavior, impact, and evidence.</text>
+    <text x="96" y="248">Creating the Jira Bug triggers triage.</text>
+
+    <text x="96" y="375">Catalog and graph suggest candidates when available.</text>
+    <text x="96" y="405">Agent inspects only approved sources; reports likely cause,</text>
+    <text x="96" y="435">alternatives, evidence, proposed fix and regression checks.</text>
+
+    <text x="96" y="561">Person confirms the diagnosis, affected repos and scope.</text>
+    <text x="96" y="591">Complex or cross-repo work needs a fuller plan and order.</text>
+
+    <text x="96" y="741">Agent changes only accepted scope and adds a regression check.</text>
+    <text x="96" y="775">Local review and checks; material changes need revalidation.</text>
+
+    <text x="96" y="923">Implementation agent opens linked draft PR(s).</text>
+    <text x="96" y="958">CI and review follow; authorized merge; owner checks outcome.</text>
+  </g>
+  <text x="862" y="182" fill="#174a78" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700">Configured Teams updates</text>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#253849">
+    <text x="862" y="221">At Bug intake:</text>
+    <text x="862" y="249">Agent posts a concise</text>
+    <text x="862" y="277">notice and Jira link.</text>
+    <text x="862" y="322">After triage:</text>
+    <text x="862" y="350">Agent posts findings</text>
+    <text x="862" y="378">and report link.</text>
+  </g>
+  <path d="M862 296 H1152" stroke="#bed4e8" stroke-width="2"/>
+  <text x="862" y="522" fill="#825822" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700">Alternative outcome</text>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#493e2e">
+    <text x="862" y="555">Needs information, blocked,</text>
+    <text x="862" y="582">no action, or non-code result:</text>
+    <text x="862" y="609">route or close without a PR.</text>
+  </g>
+  <text x="24" y="1020" fill="#526477" font-family="Arial, Helvetica, sans-serif" font-size="19">Teams updates are notifications; Jira links decisions and evidence; the agent runtime retains the detailed run.</text>
+</svg>

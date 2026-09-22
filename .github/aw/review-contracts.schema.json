@@ -1,0 +1,374 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ai-harness.invalid/review-contracts/v1",
+  "title": "Deterministic review evidence contracts",
+  "oneOf": [
+    { "$ref": "#/definitions/config" },
+    { "$ref": "#/definitions/packet" },
+    { "$ref": "#/definitions/result" },
+    { "$ref": "#/definitions/report" }
+  ],
+  "definitions": {
+    "executionEvidence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "head_sha", "policy_digest", "criteria"],
+      "properties": {
+        "schema_version": { "$ref": "#/definitions/version" },
+        "head_sha": { "$ref": "#/definitions/sha" },
+        "policy_digest": { "$ref": "#/definitions/sha256" },
+        "criteria": { "type": "array", "maxItems": 1000, "items": {
+          "type": "object", "additionalProperties": false,
+          "required": ["id", "outcome", "check"],
+          "properties": {
+            "id": { "$ref": "#/definitions/identifier" },
+            "outcome": { "enum": ["passed", "failed"] },
+            "check": { "type": "string", "minLength": 1, "maxLength": 4000 }
+          }
+        }}
+      }
+    },
+    "humanAcceptance": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "head_sha", "policy_digest", "criteria"],
+      "properties": {
+        "schema_version": { "$ref": "#/definitions/version" },
+        "head_sha": { "$ref": "#/definitions/sha" },
+        "policy_digest": { "$ref": "#/definitions/sha256" },
+        "criteria": { "$ref": "#/definitions/identifiers" }
+      }
+    },
+    "version": { "type": "integer", "const": 1 },
+    "sha": { "type": "string", "pattern": "^[0-9a-f]{40}$", "minLength": 40, "maxLength": 40 },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$", "minLength": 64, "maxLength": 64 },
+    "optionalSha256": { "type": "string", "pattern": "^([0-9a-f]{64})?$", "maxLength": 64 },
+    "identifier": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$", "minLength": 1, "maxLength": 128 },
+    "optionalIdentifier": { "type": "string", "pattern": "^([A-Za-z0-9][A-Za-z0-9_.:-]{0,127})?$", "maxLength": 128 },
+    "path": { "type": "string", "pattern": "^[^/\u0000][^\u0000]*$", "minLength": 1, "maxLength": 4096 },
+    "repository": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9-]{0,38}/[A-Za-z0-9_.-]+$", "minLength": 3, "maxLength": 140 },
+    "login": { "type": "string", "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]{0,37}[A-Za-z0-9])?$", "minLength": 1, "maxLength": 39 },
+    "text": { "type": "string", "maxLength": 16384 },
+    "nonemptyText": { "type": "string", "minLength": 1, "maxLength": 16384 },
+    "assessment": { "type": "string", "maxLength": 2097152 },
+    "positiveInteger": { "type": "integer", "minimum": 1, "maximum": 2147483647 },
+    "lineCount": { "type": "integer", "minimum": 0, "maximum": 2147483647 },
+    "strings": { "type": "array", "items": { "$ref": "#/definitions/text" }, "maxItems": 10000 },
+    "identifiers": { "type": "array", "items": { "$ref": "#/definitions/identifier" }, "maxItems": 1000, "uniqueItems": true },
+    "paths": { "type": "array", "items": { "$ref": "#/definitions/path" }, "maxItems": 2000, "uniqueItems": true },
+    "sourceRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["origin", "path", "revision"],
+      "properties": {
+        "origin": { "type": "string", "enum": ["consumer", "shared"] },
+        "path": { "$ref": "#/definitions/path" },
+        "revision": { "type": "string", "enum": ["base", "head", "release"] }
+      }
+    },
+    "methods": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["review", "execution", "human"] },
+      "minItems": 1,
+      "maxItems": 3,
+      "uniqueItems": true
+    },
+    "criterion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "description", "source", "required", "path_prefixes", "required_methods", "evidence_requirement"],
+      "properties": {
+        "id": { "$ref": "#/definitions/identifier" },
+        "kind": { "type": "string", "enum": ["requirement", "quality"] },
+        "description": { "$ref": "#/definitions/nonemptyText" },
+        "source": { "$ref": "#/definitions/sourceRef" },
+        "required": { "type": "boolean" },
+        "path_prefixes": { "$ref": "#/definitions/paths" },
+        "required_methods": { "$ref": "#/definitions/methods" },
+        "evidence_requirement": { "$ref": "#/definitions/nonemptyText" }
+      }
+    },
+    "preparedCriterion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "description", "source", "required", "path_prefixes", "required_methods", "evidence_requirement", "applicable", "source_id", "source_sha256"],
+      "properties": {
+        "id": { "$ref": "#/definitions/identifier" },
+        "kind": { "type": "string", "enum": ["requirement", "quality"] },
+        "description": { "$ref": "#/definitions/nonemptyText" },
+        "source": { "$ref": "#/definitions/sourceRef" },
+        "required": { "type": "boolean" },
+        "path_prefixes": { "$ref": "#/definitions/paths" },
+        "required_methods": { "$ref": "#/definitions/methods" },
+        "evidence_requirement": { "$ref": "#/definitions/nonemptyText" },
+        "applicable": { "type": "boolean" },
+        "source_id": { "$ref": "#/definitions/optionalIdentifier" },
+        "source_sha256": { "$ref": "#/definitions/optionalSha256" }
+      }
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_files", "max_diff_bytes", "max_context_bytes"],
+      "properties": {
+        "max_files": { "type": "integer", "minimum": 1, "maximum": 2000 },
+        "max_diff_bytes": { "type": "integer", "minimum": 1024, "maximum": 1048576 },
+        "max_context_bytes": { "type": "integer", "minimum": 1024, "maximum": 2097152 }
+      }
+    },
+    "ciRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["workflow", "artifact", "verifier_paths"],
+      "properties": {
+        "workflow": { "$ref": "#/definitions/path" },
+        "artifact": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "verifier_paths": { "allOf": [{ "$ref": "#/definitions/paths" }], "minItems": 1 }
+      }
+    },
+    "config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "purpose", "criteria", "limits"],
+      "properties": {
+        "schema_version": { "$ref": "#/definitions/version" },
+        "purpose": { "$ref": "#/definitions/nonemptyText" },
+        "criteria": { "type": "array", "items": { "$ref": "#/definitions/criterion" }, "maxItems": 1000 },
+        "context": { "type": "array", "items": { "$ref": "#/definitions/sourceRef" }, "maxItems": 1000 },
+        "limits": { "$ref": "#/definitions/limits" },
+        "ci": { "type": "array", "items": { "$ref": "#/definitions/ciRule" }, "maxItems": 20 },
+        "human_approvers": { "type": "array", "items": { "$ref": "#/definitions/login" }, "maxItems": 1000, "uniqueItems": true }
+      }
+    },
+    "run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "attempt"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "attempt": { "$ref": "#/definitions/positiveInteger" }
+      }
+    },
+    "shared": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repository", "sha"],
+      "properties": {
+        "repository": { "$ref": "#/definitions/repository" },
+        "sha": { "$ref": "#/definitions/sha" }
+      }
+    },
+    "snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["base_sha", "head_sha", "merge_base_sha", "comparison"],
+      "properties": {
+        "base_sha": { "$ref": "#/definitions/sha" },
+        "head_sha": { "$ref": "#/definitions/sha" },
+        "merge_base_sha": { "$ref": "#/definitions/sha" },
+        "comparison": { "type": "string", "const": "merge-base-to-head" }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["config_path", "config_revision", "config_sha256", "policy_digest", "purpose"],
+      "properties": {
+        "config_path": { "$ref": "#/definitions/path" },
+        "config_revision": { "$ref": "#/definitions/sha" },
+        "config_sha256": { "$ref": "#/definitions/sha256" },
+        "policy_digest": { "$ref": "#/definitions/sha256" },
+        "purpose": { "$ref": "#/definitions/nonemptyText" }
+      }
+    },
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "old_path", "status", "old_mode", "new_mode", "old_sha", "new_sha", "old_lines", "new_lines", "diff", "diff_sha256", "citation_ranges", "complete", "omissions"],
+      "properties": {
+        "path": { "$ref": "#/definitions/path" },
+        "old_path": { "anyOf": [{ "$ref": "#/definitions/path" }, { "type": "null" }] },
+        "status": { "type": "string", "enum": ["added", "modified", "deleted", "renamed", "type_changed"] },
+        "old_mode": { "type": "string", "pattern": "^[0-7]{6}$", "minLength": 6, "maxLength": 6 },
+        "new_mode": { "type": "string", "pattern": "^[0-7]{6}$", "minLength": 6, "maxLength": 6 },
+        "old_sha": { "$ref": "#/definitions/sha" },
+        "new_sha": { "$ref": "#/definitions/sha" },
+        "old_lines": { "$ref": "#/definitions/lineCount" },
+        "new_lines": { "$ref": "#/definitions/lineCount" },
+        "diff": { "type": "string", "maxLength": 1048576 },
+        "diff_sha256": { "$ref": "#/definitions/sha256" },
+        "citation_ranges": { "type": "array", "items": { "$ref": "#/definitions/citation" }, "maxItems": 10000 },
+        "complete": { "type": "boolean" },
+        "omissions": { "$ref": "#/definitions/strings" }
+      }
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "origin", "path", "revision", "sha256", "content", "lines", "complete", "purpose"],
+      "properties": {
+        "id": { "$ref": "#/definitions/identifier" },
+        "origin": { "type": "string", "enum": ["consumer", "shared"] },
+        "path": { "$ref": "#/definitions/path" },
+        "revision": { "$ref": "#/definitions/sha" },
+        "sha256": { "$ref": "#/definitions/sha256" },
+        "content": { "type": "string", "maxLength": 2097152 },
+        "lines": { "$ref": "#/definitions/lineCount" },
+        "complete": { "type": "boolean" },
+        "purpose": { "type": "string", "enum": ["criterion", "context"] }
+      }
+    },
+    "trustedEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "method", "outcome", "criterion_ids", "head_sha", "policy_digest", "producer", "url", "detail"],
+      "properties": {
+        "id": { "$ref": "#/definitions/identifier" },
+        "method": { "type": "string", "enum": ["execution", "human"] },
+        "outcome": { "type": "string", "enum": ["passed", "failed", "unverified"] },
+        "criterion_ids": { "$ref": "#/definitions/identifiers" },
+        "head_sha": { "$ref": "#/definitions/sha" },
+        "policy_digest": { "$ref": "#/definitions/sha256" },
+        "producer": { "$ref": "#/definitions/nonemptyText" },
+        "url": { "type": "string", "maxLength": 4096 },
+        "detail": { "$ref": "#/definitions/text" }
+      }
+    },
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "item", "outcome", "sha256", "detail"],
+      "properties": {
+        "kind": { "type": "string", "enum": ["available", "prepared", "observed_command", "runtime_state", "model_cited", "unobservable"] },
+        "item": { "$ref": "#/definitions/text" },
+        "outcome": { "$ref": "#/definitions/text" },
+        "sha256": { "$ref": "#/definitions/optionalSha256" },
+        "detail": { "$ref": "#/definitions/text" }
+      }
+    },
+    "events": { "type": "array", "items": { "$ref": "#/definitions/event" }, "maxItems": 10000 },
+    "evidence": { "type": "array", "items": { "$ref": "#/definitions/trustedEvidence" }, "maxItems": 1000 },
+    "packet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "packet_id", "repository", "pr", "run", "shared", "snapshot", "policy", "files", "contexts", "criteria", "evidence", "omissions", "provenance", "limitations"],
+      "properties": {
+        "schema_version": { "$ref": "#/definitions/version" },
+        "packet_id": { "$ref": "#/definitions/sha256" },
+        "repository": { "$ref": "#/definitions/repository" },
+        "pr": { "$ref": "#/definitions/positiveInteger" },
+        "run": { "$ref": "#/definitions/run" },
+        "shared": { "$ref": "#/definitions/shared" },
+        "snapshot": { "$ref": "#/definitions/snapshot" },
+        "policy": { "$ref": "#/definitions/policy" },
+        "files": { "type": "array", "items": { "$ref": "#/definitions/file" }, "maxItems": 2000 },
+        "contexts": { "type": "array", "items": { "$ref": "#/definitions/context" }, "maxItems": 2000 },
+        "criteria": { "type": "array", "items": { "$ref": "#/definitions/preparedCriterion" }, "maxItems": 1000 },
+        "evidence": { "$ref": "#/definitions/evidence" },
+        "omissions": { "$ref": "#/definitions/strings" },
+        "provenance": { "$ref": "#/definitions/events" },
+        "limitations": { "$ref": "#/definitions/strings" }
+      }
+    },
+    "citation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "revision", "start_line", "end_line"],
+      "properties": {
+        "path": { "$ref": "#/definitions/path" },
+        "revision": { "$ref": "#/definitions/sha" },
+        "start_line": { "$ref": "#/definitions/positiveInteger" },
+        "end_line": { "$ref": "#/definitions/positiveInteger" }
+      }
+    },
+    "citations": { "type": "array", "items": { "$ref": "#/definitions/citation" }, "minItems": 1, "maxItems": 1000 },
+    "coverageItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "disposition", "reason"],
+      "properties": {
+        "path": { "$ref": "#/definitions/path" },
+        "disposition": { "type": "string", "enum": ["reviewed", "partial", "unreviewed"] },
+        "reason": { "$ref": "#/definitions/text" }
+      }
+    },
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "severity", "title", "impact", "citations"],
+      "properties": {
+        "id": { "$ref": "#/definitions/identifier" },
+        "severity": { "type": "string", "enum": ["high", "medium", "low"] },
+        "title": { "type": "string", "minLength": 1, "maxLength": 1024 },
+        "impact": { "$ref": "#/definitions/nonemptyText" },
+        "citations": { "$ref": "#/definitions/citations" }
+      }
+    },
+    "criterionResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "disposition", "reason", "evidence_ids"],
+      "properties": {
+        "id": { "$ref": "#/definitions/identifier" },
+        "disposition": { "type": "string", "enum": ["satisfied", "failed", "unverified", "human_decision_required", "not_applicable"] },
+        "reason": { "$ref": "#/definitions/text" },
+        "evidence_ids": { "$ref": "#/definitions/identifiers" }
+      }
+    },
+    "reviewEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "criterion_id", "citations", "explanation"],
+      "properties": {
+        "id": { "$ref": "#/definitions/identifier" },
+        "criterion_id": { "$ref": "#/definitions/identifier" },
+        "citations": { "$ref": "#/definitions/citations" },
+        "explanation": { "$ref": "#/definitions/nonemptyText" }
+      }
+    },
+    "coverage": { "type": "array", "items": { "$ref": "#/definitions/coverageItem" }, "maxItems": 2000 },
+    "findings": { "type": "array", "items": { "$ref": "#/definitions/finding" }, "maxItems": 1000 },
+    "criterionResults": { "type": "array", "items": { "$ref": "#/definitions/criterionResult" }, "maxItems": 1000 },
+    "reviewEvidenceItems": { "type": "array", "items": { "$ref": "#/definitions/reviewEvidence" }, "maxItems": 1000 },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "packet_id", "assessment", "coverage", "findings", "criteria", "review_evidence", "limitations"],
+      "properties": {
+        "schema_version": { "$ref": "#/definitions/version" },
+        "packet_id": { "$ref": "#/definitions/sha256" },
+        "assessment": { "$ref": "#/definitions/assessment" },
+        "coverage": { "$ref": "#/definitions/coverage" },
+        "findings": { "$ref": "#/definitions/findings" },
+        "criteria": { "$ref": "#/definitions/criterionResults" },
+        "review_evidence": { "$ref": "#/definitions/reviewEvidenceItems" },
+        "limitations": { "$ref": "#/definitions/strings" }
+      }
+    },
+    "report": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "packet_id", "repository", "pr", "snapshot", "policy", "shared", "execution_state", "defect_judgment", "readiness", "merge_authority", "assessment", "coverage", "findings", "criteria", "review_evidence", "evidence", "provenance", "errors", "limitations"],
+      "properties": {
+        "schema_version": { "$ref": "#/definitions/version" },
+        "packet_id": { "$ref": "#/definitions/sha256" },
+        "repository": { "$ref": "#/definitions/repository" },
+        "pr": { "$ref": "#/definitions/positiveInteger" },
+        "snapshot": { "$ref": "#/definitions/snapshot" },
+        "policy": { "$ref": "#/definitions/policy" },
+        "shared": { "$ref": "#/definitions/shared" },
+        "execution_state": { "type": "string", "enum": ["completed", "incomplete", "failed", "cancelled", "skipped"] },
+        "defect_judgment": { "type": "string", "enum": ["findings", "no_findings", "unavailable"] },
+        "readiness": { "type": "string", "enum": ["blocked", "incomplete", "needs_human_decision", "evidence_ready"] },
+        "merge_authority": { "type": "string", "const": "human_and_repository_rules" },
+        "assessment": { "$ref": "#/definitions/assessment" },
+        "coverage": { "$ref": "#/definitions/coverage" },
+        "findings": { "$ref": "#/definitions/findings" },
+        "criteria": { "$ref": "#/definitions/criterionResults" },
+        "review_evidence": { "$ref": "#/definitions/reviewEvidenceItems" },
+        "evidence": { "$ref": "#/definitions/evidence" },
+        "provenance": { "$ref": "#/definitions/events" },
+        "errors": { "$ref": "#/definitions/strings" },
+        "limitations": { "$ref": "#/definitions/strings" }
+      }
+    }
+  }
+}

@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1000" viewBox="0 0 1200 1000" role="img" aria-labelledby="title description">
+  <title id="title">Pull request review and fix loop</title>
+  <desc id="description">A draft pull request with accepted scope, exact commit, and verification evidence is reviewed against its diff and CI results by an independent agent or human reviewer. Reviewers assess findings and their resolution; designated humans or an explicitly approved policy decide acceptance and merge after checking the evidence. Actionable findings first receive a scope check. Feedback that changes approved scope returns to planning and human approval before edits. Feedback within scope leads to a bounded implementation run for fixes and rechecks, then another review.</desc>
+  <rect width="1200" height="1000" fill="#ffffff"/>
+  <rect x="24" y="20" width="1152" height="92" rx="18" fill="#e9f2fc"/>
+  <text x="52" y="62" fill="#174a78" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="700">PR review and fix: evidence, feedback, decision</text>
+  <text x="52" y="94" fill="#27445f" font-family="Arial, Helvetica, sans-serif" font-size="21">A fix returns to review; a change in scope returns to planning.</text>
+
+  <g fill="#ffffff" stroke-width="3">
+    <rect x="170" y="142" width="700" height="110" rx="16" stroke="#8db6d8"/>
+    <rect x="170" y="290" width="700" height="120" rx="16" stroke="#83bea8"/>
+    <rect x="170" y="645" width="700" height="120" rx="16" fill="#fff8e9" stroke="#d3ae65"/>
+    <rect x="170" y="810" width="700" height="130" rx="16" stroke="#83bea8"/>
+    <rect x="840" y="445" width="336" height="145" rx="16" stroke="#8db6d8"/>
+    <rect x="900" y="645" width="276" height="120" rx="16" fill="#fff8e9" stroke="#d3ae65"/>
+  </g>
+  <path d="M520 445 L690 500 L520 555 L350 500 Z" fill="#fff8e9" stroke="#d3ae65" stroke-width="3"/>
+
+  <g stroke="#426278" stroke-width="4" fill="none">
+    <path d="M520 255 V272"/>
+    <path d="M520 413 V429"/>
+    <path d="M693 500 H824"/>
+    <path d="M520 558 V629"/>
+    <path d="M520 768 V794"/>
+    <path d="M873 705 H884"/>
+  </g>
+  <g fill="#426278">
+    <path d="M510 272 L520 285 L530 272 Z"/>
+    <path d="M510 429 L520 442 L530 429 Z"/>
+    <path d="M824 490 L837 500 L824 510 Z"/>
+    <path d="M510 629 L520 642 L530 629 Z"/>
+    <path d="M510 794 L520 807 L530 794 Z"/>
+    <path d="M884 695 L897 705 L884 715 Z"/>
+  </g>
+  <path d="M167 875 H80 V350 H157" fill="none" stroke="#906236" stroke-width="3" stroke-dasharray="9 7"/>
+  <path d="M157 340 L170 350 L157 360 Z" fill="#906236"/>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700">
+    <text x="202" y="183" fill="#174a78">1. Draft PR with verification evidence</text>
+    <text x="202" y="331" fill="#155541">2. Independent review of PR and CI</text>
+    <text x="202" y="686" fill="#825822">3. Check feedback against approved scope</text>
+    <text x="202" y="852" fill="#155541">4. Scoped implementation run fixes</text>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="21" fill="#253849">
+    <text x="202" y="218">Accepted scope, exact commit, local checks, and links.</text>
+    <text x="202" y="366">An independent agent or human checks the current diff,</text>
+    <text x="202" y="394">CI evidence, and approved scope.</text>
+    <text x="202" y="721">Changed scope returns to planning and human approval.</text>
+    <text x="202" y="750">Within scope, proceed to a bounded fix run.</text>
+    <text x="202" y="889">Address accepted findings; rerun checks and update PR.</text>
+    <text x="202" y="919">Fixes return to independent review.</text>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif" text-anchor="middle" fill="#825822">
+    <text x="520" y="495" font-size="23" font-weight="700">Actionable</text>
+    <text x="520" y="523" font-size="23" font-weight="700">findings?</text>
+  </g>
+  <text x="740" y="486" fill="#526477" font-family="Arial, Helvetica, sans-serif" font-size="19">No</text>
+  <text x="539" y="608" fill="#526477" font-family="Arial, Helvetica, sans-serif" font-size="19">Yes</text>
+  <text x="865" y="485" fill="#174a78" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700">Acceptance and merge</text>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="19" fill="#253849">
+    <text x="865" y="519">Designated human or approved</text>
+    <text x="865" y="547">policy checks findings and</text>
+    <text x="865" y="575">evidence before authorizing.</text>
+  </g>
+  <text x="925" y="685" fill="#825822" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">Scope changed?</text>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="19" fill="#493e2e">
+    <text x="925" y="721">Return to plan and</text>
+    <text x="925" y="750">human approval.</text>
+  </g>
+  <text x="24" y="980" fill="#526477" font-family="Arial, Helvetica, sans-serif" font-size="19">Reviewers assess findings and fixes; designated humans or approved policy authorize acceptance and merge.</text>
+</svg>

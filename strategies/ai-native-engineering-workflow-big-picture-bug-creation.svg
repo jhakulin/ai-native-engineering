@@ -1,0 +1,174 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1360" viewBox="0 0 1400 1360" role="img" aria-labelledby="title description">
+  <title id="title">AI-Native Engineering Workflow: Big Picture</title>
+  <desc id="description">Feature work starts with human-owned Jira Epic intent and a Spec agent drafting a Story. A human or AI agent creates a Jira Bug, which triggers the Bug triage agent. Human approval of the Story or acceptance of the Bug diagnosis leads to a shared delivery path. The technical plan identifies affected repositories, changes, and verification; a Planning agent expands it when needed, while an accepted Bug triage report can already provide it. An Implementation agent changes an approved repository in a local workspace, verifies the change, and publishes a linked draft pull request. An independent PR review agent records findings, and a scoped implementation run fixes accepted feedback if needed, then returns to independent review. Human gates approve the Story, diagnosis and scope, and consequential plan choices; a designated human or explicitly approved policy authorizes acceptance and merge. After merge, the work-item owner checks the delivered outcome. Jira, Teams, Confluence, GitHub, a shared AI registry, and the agent runtime support these stages with scoped access. CI indexes GitHub-hosted component catalogs and tree-sitter-derived code graphs in SQLite. Agents query the index through MCP APIs hosted on Azure Functions. A shared observability view linked from work items shows scoped input and output traces, tool actions, evidence, failures, decisions, and versions for each run. Run evidence, failures, and verified outcomes flow to human path owners, who test and version improvements for future runs. Possible execution forms include repository-capable coding agents, SDK-hosted cross-tool agents, and GitHub Agentic Workflows that run a coding engine in GitHub Actions. Each run starts from a configured, authorized trigger.</desc>
+  <rect width="1400" height="1360" fill="#ffffff"/>
+  <rect x="24" y="20" width="1352" height="106" rx="18" fill="#e9f2fc"/>
+  <text x="52" y="64" fill="#174a78" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">AI-Native Engineering Workflow: Big Picture</text>
+  <text x="52" y="101" fill="#27445f" font-family="Arial, Helvetica, sans-serif" font-size="21">Feature and Bug intake converge on governed delivery. Green labels mark AI agents; gold bars mark approval decisions.</text>
+
+  <g fill="#ffffff" stroke-width="3">
+    <rect x="40" y="156" width="640" height="264" rx="17" stroke="#8db6d8"/>
+    <rect x="720" y="156" width="640" height="264" rx="17" stroke="#8db6d8"/>
+    <rect x="270" y="560" width="860" height="150" rx="17" stroke="#83bea8"/>
+    <rect x="270" y="750" width="860" height="150" rx="17" stroke="#83bea8"/>
+    <rect x="270" y="940" width="860" height="275" rx="17" stroke="#83bea8"/>
+  </g>
+  <g fill="#e8f5ee" stroke="#83bea8" stroke-width="1.5">
+    <rect x="60" y="244" width="175" height="37" rx="9"/>
+    <rect x="740" y="244" width="230" height="37" rx="9"/>
+    <rect x="872" y="568" width="236" height="35" rx="9"/>
+    <rect x="825" y="758" width="283" height="35" rx="9"/>
+    <rect x="293" y="1032" width="225" height="33" rx="8"/>
+    <rect x="572" y="1032" width="205" height="33" rx="8"/>
+    <rect x="862" y="1032" width="241" height="33" rx="8"/>
+  </g>
+
+  <g fill="#174a78" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700">
+    <text x="70" y="192">FEATURE PATH · JIRA</text>
+    <text x="750" y="192">BUG PATH · JIRA</text>
+  </g>
+  <g fill="#243d54" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">
+    <text x="70" y="231">Human Epic intent → Story spec</text>
+    <text x="750" y="231">Bug intake → diagnosis</text>
+  </g>
+  <g fill="#155541" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">
+    <text x="70" y="270">Spec agent</text>
+    <text x="750" y="270">Bug triage agent</text>
+  </g>
+  <g fill="#253849" font-family="Arial, Helvetica, sans-serif" font-size="20">
+    <text x="70" y="302">Trigger: human request with Epic and selected sources</text>
+    <text x="70" y="336">Drafts and clarifies a templated Jira Story</text>
+    <text x="750" y="302">Trigger: human or AI agent creates a Jira Bug</text>
+    <text x="750" y="336">Produces evidence-backed triage and a proposed fix</text>
+  </g>
+  <g fill="#fff3d6" stroke="#c48b32" stroke-width="2">
+    <rect x="60" y="367" width="600" height="42" rx="10"/>
+    <rect x="740" y="367" width="600" height="42" rx="10"/>
+    <rect x="286" y="666" width="828" height="34" rx="9"/>
+    <rect x="286" y="1130" width="828" height="42" rx="9"/>
+  </g>
+  <g fill="#80531c" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700">
+    <text x="78" y="395">HUMAN GATE · approves Story spec</text>
+    <text x="758" y="395">HUMAN GATE · accepts diagnosis and scope</text>
+    <text x="305" y="689">HUMAN GATE · accepts affected repos and plan when required</text>
+    <text x="305" y="1158">APPROVAL GATE · designated human or approved policy authorizes merge</text>
+  </g>
+
+  <g stroke="#426278" stroke-width="3" fill="none">
+    <path d="M360 422 V451 H700"/>
+    <path d="M1040 422 V451 H700"/>
+    <path d="M700 451 V469"/>
+    <path d="M700 522 V557"/>
+    <path d="M700 712 V747"/>
+    <path d="M700 902 V937"/>
+  </g>
+  <g fill="#426278">
+    <path d="M690 469 L700 482 L710 469 Z"/>
+    <path d="M690 548 L700 560 L710 548 Z"/>
+    <path d="M690 738 L700 750 L710 738 Z"/>
+    <path d="M690 928 L700 940 L710 928 Z"/>
+  </g>
+  <rect x="443" y="480" width="514" height="42" rx="11" fill="#e9f2fc" stroke="#8db6d8" stroke-width="2"/>
+  <text x="700" y="508" text-anchor="middle" fill="#174a78" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700">Approved Story OR accepted Bug diagnosis</text>
+
+  <g fill="#243d54" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700">
+    <text x="300" y="594">Technical plan</text>
+    <text x="300" y="784">Implementation and verification</text>
+    <text x="300" y="975">PR publication and review</text>
+  </g>
+  <g fill="#155541" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700">
+    <text x="884" y="594">Planning agent</text>
+    <text x="837" y="784">Implementation agent</text>
+  </g>
+  <g fill="#253849" font-family="Arial, Helvetica, sans-serif" font-size="20">
+    <text x="300" y="626">Runs when accepted work needs a fuller plan</text>
+    <text x="300" y="654">Plan identifies affected repositories, changes, and verification</text>
+    <text x="300" y="816">Trigger: accepted plan and approved repository scope</text>
+    <text x="300" y="844">Output: bounded change, local review, tests, static analysis</text>
+    <text x="300" y="874">Material changes to facts or scope require a human decision</text>
+  </g>
+  <g fill="#243d54" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">
+    <text x="300" y="1016">Draft PR</text>
+    <text x="579" y="1016">Independent review</text>
+    <text x="869" y="1016">Scoped fix, if needed</text>
+  </g>
+  <g fill="#253849" font-family="Arial, Helvetica, sans-serif" font-size="18">
+    <text x="300" y="1080">After local verification</text>
+    <text x="579" y="1080">On eligible PR</text>
+    <text x="869" y="1080">On accepted feedback</text>
+  </g>
+  <g fill="#155541" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">
+    <text x="305" y="1054">Implementation agent</text>
+    <text x="584" y="1054">PR review agent</text>
+    <text x="874" y="1054">Implementation agent</text>
+  </g>
+  <g stroke="#426278" stroke-width="3" fill="none">
+    <path d="M532 1010 H558"/>
+    <path d="M819 1010 H848"/>
+  </g>
+  <g fill="#426278">
+    <path d="M549 1002 L560 1010 L549 1018 Z"/>
+    <path d="M839 1002 L850 1010 L839 1018 Z"/>
+  </g>
+  <path d="M985 1093 V1107 H683 V1094" fill="none" stroke="#906236" stroke-width="3" stroke-dasharray="8 6"/>
+  <path d="M675 1104 L683 1092 L691 1104 Z" fill="#906236"/>
+  <text x="305" y="1198" fill="#253849" font-family="Arial, Helvetica, sans-serif" font-size="18">After merge, the work-item owner checks the delivered outcome.</text>
+
+  <g fill="#f4f7fa" stroke="#b4c4d1" stroke-width="2">
+    <rect x="40" y="560" width="210" height="145" rx="14"/>
+    <rect x="40" y="730" width="210" height="145" rx="14"/>
+    <rect x="40" y="900" width="210" height="130" rx="14"/>
+    <rect x="40" y="1050" width="210" height="135" rx="14"/>
+    <rect x="1150" y="560" width="210" height="240" rx="14"/>
+    <rect x="1150" y="815" width="210" height="110" rx="14"/>
+    <rect x="1150" y="940" width="210" height="195" rx="14"/>
+  </g>
+  <g fill="#174a78" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700">
+    <text x="58" y="593">TEAMS</text>
+    <text x="58" y="763">CONFLUENCE</text>
+    <text x="58" y="933">GITHUB</text>
+    <text x="58" y="1083">OBSERVABILITY</text>
+    <text x="1168" y="590" font-size="15">COMPONENT CATALOG</text>
+    <text x="1168" y="614" font-size="18">+ CODE GRAPH</text>
+    <text x="1168" y="845">SHARED AI</text>
+    <text x="1168" y="870">REGISTRY</text>
+    <text x="1168" y="973">AGENT RUNTIME</text>
+  </g>
+  <g stroke="#b4c4d1" stroke-width="1.5">
+    <path d="M1168 628 H1342"/>
+    <path d="M1168 711 H1342"/>
+  </g>
+  <g fill="#174a78" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">
+    <text x="1168" y="653">INDEX</text>
+    <text x="1168" y="737">QUERY</text>
+  </g>
+  <g fill="#253849" font-family="Arial, Helvetica, sans-serif" font-size="18">
+    <text x="58" y="627">Scoped input,</text>
+    <text x="58" y="653">clarification,</text>
+    <text x="58" y="679">agent updates</text>
+    <text x="58" y="797">Relevant pages;</text>
+    <text x="58" y="823">draft or update in</text>
+    <text x="58" y="849">approved scope</text>
+    <text x="58" y="967">Hosted repository,</text>
+    <text x="58" y="991">PRs, CI, review,</text>
+    <text x="58" y="1015">merge</text>
+    <text x="58" y="1115">Inputs, outputs,</text>
+    <text x="58" y="1139">tool actions, evidence</text>
+    <text x="58" y="1163">shared run view</text>
+    <text x="1168" y="677" font-size="16">GitHub repos → CI</text>
+    <text x="1168" y="699" font-size="16">CI → SQLite</text>
+    <text x="1168" y="761" font-size="16">Agents → MCP</text>
+    <text x="1168" y="783" font-size="15">Azure Functions → SQLite</text>
+    <text x="1168" y="893" font-size="15">Versioned guidance,</text>
+    <text x="1168" y="914" font-size="15">templates, agents</text>
+    <text x="1168" y="1005">Run options:</text>
+    <text x="1168" y="1030">coding agent,</text>
+    <text x="1168" y="1055">SDK-hosted agent,</text>
+    <text x="1168" y="1080">GitHub Agentic</text>
+    <text x="1168" y="1105">Workflow*</text>
+    <text x="1168" y="1125" font-size="15">Scoped evidence</text>
+  </g>
+  <rect x="40" y="1230" width="1320" height="40" rx="9" fill="#e9f2fc" stroke="#8db6d8" stroke-width="2"/>
+  <text x="700" y="1257" text-anchor="middle" fill="#174a78" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700">Run evidence, failures, and verified outcomes → path owners test and version improvements → future runs</text>
+  <text x="40" y="1310" fill="#526477" font-family="Arial, Helvetica, sans-serif" font-size="16">*GitHub Agentic Workflows run a selected coding engine. All runs use scoped access, evidence, and approval gates.</text>
+</svg>

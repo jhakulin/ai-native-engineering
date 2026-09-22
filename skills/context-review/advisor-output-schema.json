@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://context-review.local/advisor-output-schema-v1.json",
+  "title": "Context Review Advisor Output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["promptVersion", "summary", "recommendedActions", "modelFit", "contextAction", "persistentCompactionAdvice", "limitations"],
+  "properties": {
+    "promptVersion": { "const": 1 },
+    "summary": { "$ref": "#/$defs/text" },
+    "recommendedActions": {
+      "type": "array",
+      "maxItems": 3,
+      "items": { "$ref": "#/$defs/action" }
+    },
+    "modelFit": { "$ref": "#/$defs/modelFit" },
+    "contextAction": { "$ref": "#/$defs/contextAction" },
+    "persistentCompactionAdvice": {
+      "type": "array",
+      "maxItems": 3,
+      "items": { "$ref": "#/$defs/persistentAdvice" }
+    },
+    "limitations": { "$ref": "#/$defs/textArray" }
+  },
+  "$defs": {
+    "text": { "type": "string", "minLength": 1, "maxLength": 1000 },
+    "shortText": { "type": "string", "minLength": 1, "maxLength": 200 },
+    "nullableText": { "anyOf": [{ "type": "string", "minLength": 1, "maxLength": 500 }, { "type": "null" }] },
+    "idArray": {
+      "type": "array",
+      "maxItems": 12,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1, "maxLength": 200 }
+    },
+    "textArray": {
+      "type": "array",
+      "maxItems": 12,
+      "items": { "$ref": "#/$defs/text" }
+    },
+    "command": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["harness", "kind", "name", "args", "settingScope"],
+          "properties": {
+            "harness": { "enum": ["codex", "claude", "pi"] },
+            "kind": { "enum": ["command", "setting"] },
+            "name": { "type": "string", "minLength": 1, "maxLength": 100 },
+            "args": {
+              "type": "array",
+              "maxItems": 2,
+              "items": { "type": "string", "maxLength": 1000 }
+            },
+            "settingScope": { "enum": ["session", "repository", "user", null] }
+          }
+        }
+      ]
+    },
+    "expectedBenefit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["proxyType", "metricId", "direction", "description"],
+      "properties": {
+        "proxyType": { "enum": ["tokens", "bytes", "calls", "compactions", "qualitative"] },
+        "metricId": { "anyOf": [{ "type": "string", "minLength": 1, "maxLength": 200 }, { "type": "null" }] },
+        "direction": { "enum": ["decrease", "avoid_increase"] },
+        "description": { "$ref": "#/$defs/text" }
+      }
+    },
+    "action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rank", "title", "driverIds", "metricIds", "contributorIds", "change", "expectedBenefit", "prerequisites", "risk", "confidence", "limitations"],
+      "properties": {
+        "rank": { "type": "integer", "minimum": 1, "maximum": 3 },
+        "title": { "$ref": "#/$defs/shortText" },
+        "driverIds": { "$ref": "#/$defs/idArray" },
+        "metricIds": { "$ref": "#/$defs/idArray" },
+        "contributorIds": { "$ref": "#/$defs/idArray" },
+        "change": { "$ref": "#/$defs/text" },
+        "expectedBenefit": { "$ref": "#/$defs/expectedBenefit" },
+        "prerequisites": { "$ref": "#/$defs/textArray" },
+        "risk": { "$ref": "#/$defs/text" },
+        "confidence": { "enum": ["high", "medium", "low"] },
+        "limitations": { "$ref": "#/$defs/textArray" }
+      }
+    },
+    "modelFit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["recommendation", "currentModel", "currentEffort", "proposedModel", "proposedEffort", "evidenceIds", "taskDemands", "tradeoffs", "confidence", "limitations", "command"],
+      "properties": {
+        "recommendation": { "enum": ["keep", "lower_effort", "faster_model", "raise_effort", "stronger_model", "larger_context_model", "none"] },
+        "currentModel": { "$ref": "#/$defs/shortText" },
+        "currentEffort": { "$ref": "#/$defs/shortText" },
+        "proposedModel": { "$ref": "#/$defs/nullableText" },
+        "proposedEffort": { "$ref": "#/$defs/nullableText" },
+        "evidenceIds": { "$ref": "#/$defs/idArray" },
+        "taskDemands": { "$ref": "#/$defs/textArray" },
+        "tradeoffs": { "$ref": "#/$defs/textArray" },
+        "confidence": { "enum": ["high", "medium", "low"] },
+        "limitations": { "$ref": "#/$defs/textArray" },
+        "command": { "$ref": "#/$defs/command" }
+      }
+    },
+    "reducibleScope": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["value", "unit", "scope", "metricId", "qualification"],
+          "properties": {
+            "value": { "type": "number", "minimum": 0 },
+            "unit": { "enum": ["tokens", "bytes", "calls", "percent"] },
+            "scope": { "$ref": "#/$defs/shortText" },
+            "metricId": { "type": "string", "minLength": 1, "maxLength": 200 },
+            "qualification": { "$ref": "#/$defs/text" }
+          }
+        }
+      ]
+    },
+    "preservationEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["category", "description", "evidenceIds"],
+      "properties": {
+        "category": { "enum": ["goal", "scope", "requirement", "constraint", "decision", "authoritative_source", "modified_file", "verification", "unresolved_failure", "uncertainty", "next_step"] },
+        "description": { "$ref": "#/$defs/text" },
+        "evidenceIds": { "$ref": "#/$defs/idArray" }
+      }
+    },
+    "contextAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["recommendation", "evidenceIds", "reason", "estimatedReducibleScope", "preserve", "reduce", "risk", "command"],
+      "properties": {
+        "recommendation": { "enum": ["continue", "compact", "start_fresh", "none"] },
+        "evidenceIds": { "$ref": "#/$defs/idArray" },
+        "reason": { "$ref": "#/$defs/text" },
+        "estimatedReducibleScope": { "$ref": "#/$defs/reducibleScope" },
+        "preserve": {
+          "type": "array",
+          "maxItems": 12,
+          "items": { "$ref": "#/$defs/preservationEntry" }
+        },
+        "reduce": { "$ref": "#/$defs/textArray" },
+        "risk": { "$ref": "#/$defs/text" },
+        "command": { "$ref": "#/$defs/command" }
+      }
+    },
+    "persistentAdvice": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["setting", "currentValue", "proposedValue", "stability", "evidenceIds", "expectedEffect", "risk", "rollback", "limitations"],
+      "properties": {
+        "setting": { "$ref": "#/$defs/shortText" },
+        "currentValue": { "$ref": "#/$defs/nullableText" },
+        "proposedValue": { "$ref": "#/$defs/text" },
+        "stability": { "enum": ["stable", "experimental"] },
+        "evidenceIds": { "$ref": "#/$defs/idArray" },
+        "expectedEffect": { "$ref": "#/$defs/text" },
+        "risk": { "$ref": "#/$defs/text" },
+        "rollback": { "$ref": "#/$defs/text" },
+        "limitations": { "$ref": "#/$defs/textArray" }
+      }
+    }
+  }
+}

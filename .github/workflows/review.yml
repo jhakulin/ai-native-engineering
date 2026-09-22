@@ -1,0 +1,23 @@
+name: Change Review Private Pilot
+
+on:
+  workflow_dispatch:
+    inputs:
+      pull_request_number:
+        description: Pull request number; dispatch authorizes paid Codex review
+        type: string
+        required: true
+
+permissions:
+  actions: read
+  contents: read
+  pull-requests: read
+
+jobs:
+  pilot:
+    if: github.repository == 'jhakulin/ai-harness' && github.event.repository.private == true
+    uses: ./.github/workflows/review-change.lock.yml
+    with:
+      pull_request_number: ${{ inputs.pull_request_number }}
+    secrets:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
